@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Timer
 {
@@ -14,7 +15,18 @@ namespace Timer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Timer());
+            Mutex s_Mutex = new Mutex(true, "m_Timer");
+            if (s_Mutex.WaitOne(0, false))
+                Application.Run(new Timer());
+            else
+            {
+                MessageBox.Show(
+                    "Another Timer is already running! (we have to close this one)",
+                    "Timer Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
     }
 }
