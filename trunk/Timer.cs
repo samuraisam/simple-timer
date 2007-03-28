@@ -17,7 +17,9 @@ namespace Timer
         private bool isAltDown;
         private bool isSpcDown;
         private bool isCrtlDown;
-
+        /// <summary>
+        /// Winforms class constructor. Does all the usual suspects.
+        /// </summary>
         public Timer()
         {
             stopwatch = new Stopwatch();
@@ -31,13 +33,22 @@ namespace Timer
 
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Quits Timer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Quit(object sender, KeyEventArgs e)
         {
             if (e.KeyData.ToString() == "Escape")
                 exitButton_Click(sender, e);
         }
-
+        /// <summary>
+        /// Runs the key handlers if combinations are found. Also sets the
+        /// internal state of the keys.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void GlobalKeyDownHandler(object sender, KeyEventArgs e)
         {
             string keyString = e.KeyData.ToString();
@@ -61,6 +72,11 @@ namespace Timer
             }
         }
 
+        /// <summary>
+        /// Does nothing other than reset the internal state of the keys
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void GlobalKeyUpHandler(object sender, KeyEventArgs e)
         {
             string keyString = e.KeyData.ToString();
