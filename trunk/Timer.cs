@@ -254,7 +254,7 @@ namespace Timer
                 name = this.GetName();
             }
             catch { return;  }
-            this.Text = name;
+            this.Text = name + " - Timer";
         }
     }
 }
