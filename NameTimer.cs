@@ -15,9 +15,14 @@ namespace Timer
             InitializeComponent();
         }
 
-        public string getNameValue()
+        public string GetNameValue()
         {
             return this.nameField.Text;
+        }
+
+        private void NameTimer_Load(object sender, EventArgs e)
+        {
+            this.nameField.Focus();
         }
     }
 }

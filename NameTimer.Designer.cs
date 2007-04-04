@@ -77,6 +77,7 @@ namespace Timer
             this.Name = "NameTimer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Choose a Name";
+            this.Load += new System.EventHandler(this.NameTimer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
