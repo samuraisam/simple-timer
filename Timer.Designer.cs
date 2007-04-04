@@ -35,6 +35,7 @@ namespace Timer
             this.startButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
+            this.renameButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // timerMain
@@ -49,7 +50,7 @@ namespace Timer
             this.timeDisplay.Location = new System.Drawing.Point(12, 12);
             this.timeDisplay.Name = "timeDisplay";
             this.timeDisplay.ReadOnly = true;
-            this.timeDisplay.Size = new System.Drawing.Size(230, 41);
+            this.timeDisplay.Size = new System.Drawing.Size(285, 41);
             this.timeDisplay.TabIndex = 0;
             // 
             // startButton
@@ -75,10 +76,10 @@ namespace Timer
             this.resetButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resetButton.Location = new System.Drawing.Point(90, 59);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(80, 38);
+            this.resetButton.Size = new System.Drawing.Size(55, 38);
             this.resetButton.TabIndex = 2;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = false;
@@ -93,7 +94,7 @@ namespace Timer
             this.exitButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(176, 59);
+            this.exitButton.Location = new System.Drawing.Point(231, 59);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(66, 38);
             this.exitButton.TabIndex = 3;
@@ -101,13 +102,30 @@ namespace Timer
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // renameButton
+            // 
+            this.renameButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.renameButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
+            this.renameButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.renameButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.renameButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.renameButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.renameButton.Location = new System.Drawing.Point(151, 59);
+            this.renameButton.Name = "renameButton";
+            this.renameButton.Size = new System.Drawing.Size(74, 38);
+            this.renameButton.TabIndex = 4;
+            this.renameButton.Text = "Rename";
+            this.renameButton.UseVisualStyleBackColor = false;
+            this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
+            // 
             // Timer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.exitButton;
-            this.ClientSize = new System.Drawing.Size(254, 110);
+            this.ClientSize = new System.Drawing.Size(309, 110);
             this.ControlBox = false;
+            this.Controls.Add(this.renameButton);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.startButton);
@@ -129,6 +147,7 @@ namespace Timer
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Button renameButton;
     }
 }
 

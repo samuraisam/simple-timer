@@ -16,7 +16,7 @@
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationIcon>Timer.ico</ApplicationIcon>
-    <PublishUrl>C:\Documents and Settings\sam\My Documents\Visual Studio 2005\Projects\Timer\Publish\Timer\</PublishUrl>
+    <PublishUrl>C:\Documents and Settings\sam\My Documents\Visual Studio 2005\Projects\simple-timer\Publish\Timer\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -28,7 +28,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <CreateWebPageOnPublish>false</CreateWebPageOnPublish>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -57,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NameTimer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NameTimer.Designer.cs">
+      <DependentUpon>NameTimer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Timer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="NameTimer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NameTimer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Timer.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Timer.cs</DependentUpon>
