@@ -14,9 +14,9 @@ namespace Timer
     {
         private Stopwatch stopwatch;
         UserActivityHook actHook;
-        private bool isAltDown;
-        private bool isSpcDown;
-        private bool isCrtlDown;
+        private bool isAltDown = false;
+        private bool isSpcDown = false;
+        private bool isCrtlDown = false;
         private bool useKeyCommands;
         private const int WMTaskbarRClick = 0x0313;
         private ContextMenu taskbarMenu;
@@ -25,19 +25,16 @@ namespace Timer
         /// Constructs object and determines the use of key commands.
         /// </summary>
         /// <param name="_useKeyCommands">Whether or not to hook global key commands.</param>
-        public Timer(bool _useKeyCommands)
+        public Timer()
         {
-            stopwatch = new Stopwatch();
-            isAltDown = false;
-            isSpcDown = false;
-            isCrtlDown = false;
-            useKeyCommands = _useKeyCommands;
+            this.stopwatch = new Stopwatch();
+            this.useKeyCommands = this.DetectKeyCommands();
 
-            if (useKeyCommands)
+            if (this.useKeyCommands)
             {
                 try
                 {
-                    actHook = new UserActivityHook();
+                    this.actHook = new UserActivityHook();
                 }
                 catch
                 {
@@ -48,16 +45,16 @@ namespace Timer
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
                     );
-                    useKeyCommands = false;
+                    this.useKeyCommands = false;
                 }
-                actHook.KeyDown += new KeyEventHandler(GlobalKeyDownHandler);
-                actHook.KeyUp += new KeyEventHandler(GlobalKeyUpHandler);
+                this.actHook.KeyDown += new KeyEventHandler(GlobalKeyDownHandler);
+                this.actHook.KeyUp += new KeyEventHandler(GlobalKeyUpHandler);
             }
 
-            InitializeComponent();
-            InitializeTaskbarMenu();
+            this.InitializeComponent();
+            this.InitializeTaskbarMenu();
 
-            this.setName();
+            this.SetName();
         }
 
         /// <summary>
@@ -68,7 +65,7 @@ namespace Timer
         public void Quit(object sender, KeyEventArgs e)
         {
             if (e.KeyData.ToString() == "Escape")
-                exitButton_Click(sender, e);
+                this.exitButton_Click(sender, e);
         }
 
         /// <summary>
@@ -82,10 +79,24 @@ namespace Timer
                 case WMTaskbarRClick:
                     Point menuPos = new Point(Cursor.Position.X - this.Location.X,
                                               Cursor.Position.Y - this.Location.Y);
-                    taskbarMenu.Show(this, menuPos);
+                    this.taskbarMenu.Show(this, menuPos);
                     break;
             }
             base.WndProc(ref m);
+        }
+
+        /// <summary>
+        /// Detects whether we will use the key commands or not.
+        /// </summary>
+        /// <returns>Whether we use global key commands.</returns>
+        private bool DetectKeyCommands()
+        {
+            string proc = Process.GetCurrentProcess().ProcessName;
+            Process[] processes = Process.GetProcessesByName(proc);
+            if (processes.Length > 1)
+                return false;
+            else
+                return true;
         }
 
         /// <summary>
@@ -93,13 +104,13 @@ namespace Timer
         /// </summary>
         private void InitializeTaskbarMenu()
         {
-            taskbarMenu = new ContextMenu();
-            taskbarMenu.MenuItems.Add("Start", new EventHandler(startButton_Click));
-            taskbarMenu.MenuItems.Add("Reset", new EventHandler(resetButton_Click));
-            taskbarMenu.MenuItems.Add(new MenuItem("-"));
-            taskbarMenu.MenuItems.Add("Rename", new EventHandler(renameButton_Click));
-            taskbarMenu.MenuItems.Add(new MenuItem("-"));
-            taskbarMenu.MenuItems.Add("Exit", new EventHandler(exitButton_Click));
+            this.taskbarMenu = new ContextMenu();
+            this.taskbarMenu.MenuItems.Add("Start", new EventHandler(startButton_Click));
+            this.taskbarMenu.MenuItems.Add("Reset", new EventHandler(resetButton_Click));
+            this.taskbarMenu.MenuItems.Add(new MenuItem("-"));
+            this.taskbarMenu.MenuItems.Add("Rename", new EventHandler(renameButton_Click));
+            this.taskbarMenu.MenuItems.Add(new MenuItem("-"));
+            this.taskbarMenu.MenuItems.Add("Exit", new EventHandler(exitButton_Click));
         }
 
         /// <summary>
@@ -107,11 +118,11 @@ namespace Timer
         /// </summary>
         /// <returns>Title for timer.</returns>
         /// <exception>Exception</exception>
-        private string getName()
+        private string GetName()
         {
             NameTimer namer = new NameTimer();
             DialogResult re = namer.ShowDialog();
-            string name = namer.getNameValue();
+            string name = namer.GetNameValue();
             if (re == DialogResult.OK && !String.IsNullOrEmpty(name.Trim()))
             {
                 return name;
@@ -123,14 +134,14 @@ namespace Timer
         /// Sets the name of the timer. Keeps asking until the
         /// bastard provides a valid name!
         /// </summary>
-        private void setName()
+        private void SetName()
         {
             bool keepAsking = true;
             while (keepAsking)
             {
                 try
                 {
-                    this.Text = getName() + " - Timer";
+                    this.Text = GetName() + " - Timer";
                 }
                 catch
                 {
@@ -152,21 +163,21 @@ namespace Timer
         {
             string keyString = e.KeyData.ToString();
             if (keyString == "LMenu" || keyString == "RMenu")
-                isAltDown = true;
+                this.isAltDown = true;
             if (keyString == "Space")
-                isSpcDown = true;
+                this.isSpcDown = true;
             if (keyString == "LControlKey" || keyString == "RControlKey")
-                isCrtlDown = true;
+                this.isCrtlDown = true;
             // stop/start  alt+spc
             if (isAltDown && isSpcDown)
             {
-                startButton_Click(sender, e);
+                this.startButton_Click(sender, e);
                 e.Handled = true;
             }
             // reset       crtl+alt+spc
             if (isAltDown && isSpcDown && isCrtlDown)
             {
-                resetButton_Click(sender, e);
+                this.resetButton_Click(sender, e);
                 e.Handled = true;
             }
         }
@@ -180,48 +191,48 @@ namespace Timer
         {
             string keyString = e.KeyData.ToString();
             if (keyString == "LMenu" || keyString == "RMenu")
-                isAltDown = false;
+                this.isAltDown = false;
             if (keyString == "Space")
-                isSpcDown = false;
+                this.isSpcDown = false;
             if (keyString == "LControlKey" || keyString == "RControlKey")
-                isCrtlDown = false;
+                this.isCrtlDown = false;
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
             if (stopwatch.IsRunning)
             {
-                stopwatch.Stop();
-                startButton.Text = "Start";
-                taskbarMenu.MenuItems[0].Text = "Start"; // ugly, i know...
+                this.stopwatch.Stop();
+                this.startButton.Text = "Start";
+                this.taskbarMenu.MenuItems[0].Text = "Start"; // ugly, i know...
             }
             else
             {
-                stopwatch.Start();
-                startButton.Text = "Stop";
-                taskbarMenu.MenuItems[0].Text = "Stop";
+                this.stopwatch.Start();
+                this.startButton.Text = "Stop";
+                this.taskbarMenu.MenuItems[0].Text = "Stop";
             }
         }
 
         private void timerMain_Tick(object sender, EventArgs e)
         {
-            if (stopwatch.IsRunning)
+            if (this.stopwatch.IsRunning)
             {
                 TimeSpan ts = stopwatch.Elapsed;
-                timeDisplay.Text = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                this.timeDisplay.Text = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                     ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds/10);
             }
         }
 
         private void resetButton_Click(object sender, EventArgs e)
         {
-            if (stopwatch.IsRunning)
+            if (this.stopwatch.IsRunning)
             {
-                stopwatch.Stop();
-                startButton.Text = "Start";
+                this.stopwatch.Stop();
+                this.startButton.Text = "Start";
             }
-            timeDisplay.Text = "";
-            stopwatch.Reset();
+            this.timeDisplay.Text = "";
+            this.stopwatch.Reset();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -240,7 +251,7 @@ namespace Timer
             string name;
             try
             {
-                name = this.getName();
+                name = this.GetName();
             }
             catch { return;  }
             this.Text = name;
