@@ -240,6 +240,7 @@ namespace Timer
             }
             this.timeDisplay.Text = "";
             this.stopwatch.Reset();
+            this.timerLog.Rows.Clear();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
