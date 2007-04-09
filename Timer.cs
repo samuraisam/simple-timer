@@ -1,4 +1,5 @@
 using System;
+using System.Resources;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,21 +15,25 @@ namespace Timer
     {
         private Stopwatch stopwatch;
         UserActivityHook actHook;
+        private ResourceManager resman;
+        private ContextMenu taskbarMenu;
         private bool isAltDown = false;
         private bool isSpcDown = false;
         private bool isCrtlDown = false;
         private bool useKeyCommands;
         private const int WMTaskbarRClick = 0x0313;
-        private ContextMenu taskbarMenu;
+        private bool showingLog = false;
+        private DateTime timerStarted;
         
         /// <summary>
         /// Constructs object and determines the use of key commands.
         /// </summary>
-        /// <param name="_useKeyCommands">Whether or not to hook global key commands.</param>
         public Timer()
         {
             this.stopwatch = new Stopwatch();
             this.useKeyCommands = this.DetectKeyCommands();
+
+            this.resman = new ResourceManager("Timer.Properties.Resources", this.GetType().Assembly);
 
             if (this.useKeyCommands)
             {
@@ -205,12 +210,14 @@ namespace Timer
                 this.stopwatch.Stop();
                 this.startButton.Text = "Start";
                 this.taskbarMenu.MenuItems[0].Text = "Start"; // ugly, i know...
+                this.UpdateLog();
             }
             else
             {
                 this.stopwatch.Start();
                 this.startButton.Text = "Stop";
                 this.taskbarMenu.MenuItems[0].Text = "Stop";
+                this.timerStarted = DateTime.Now;
             }
         }
 
@@ -255,6 +262,48 @@ namespace Timer
             }
             catch { return;  }
             this.Text = name + " - Timer";
+        }
+
+        /// <summary>
+        /// Shows or hides the loging pane. Does a quick little transition for each one.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void showLog_Click(object sender, EventArgs e)
+        {
+            if (!this.showingLog)
+            {
+                while (this.Height < 370)
+                {
+                    this.Height += 20;
+                    this.Refresh();
+                }
+                this.showingLog = true;
+                this.showLog.Image = ((System.Drawing.Image)(resman.GetObject("showLogUp")));
+            }
+            else
+            {
+                while (this.Height > 150)
+                {
+                    this.Height -= 20;
+                    this.Refresh();
+                }
+                this.showingLog = false;
+                this.showLog.Image = ((System.Drawing.Image)(resman.GetObject("showLogDown")));
+            }
+        }
+
+        /// <summary>
+        /// Adds a row to the timerLog representing time started/stoped and total time taken.
+        /// </summary>
+        private void UpdateLog()
+        {
+            TimeSpan ts = DateTime.Now - this.timerStarted;
+            this.timerLog.Rows.Add(
+                this.timerStarted.ToString("T"),
+                DateTime.Now.ToString("T"),
+                String.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds)
+            );
         }
     }
 }
