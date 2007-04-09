@@ -17,13 +17,13 @@ namespace Timer
         UserActivityHook actHook;
         private ResourceManager resman;
         private ContextMenu taskbarMenu;
+        private DateTime timerStarted;
         private bool isAltDown = false;
         private bool isSpcDown = false;
         private bool isCrtlDown = false;
         private bool useKeyCommands;
         private const int WMTaskbarRClick = 0x0313;
         private bool showingLog = false;
-        private DateTime timerStarted;
         
         /// <summary>
         /// Constructs object and determines the use of key commands.
