@@ -144,18 +144,19 @@ namespace Timer
             this.timerLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.timerLog.ShowEditingIcon = false;
             this.timerLog.ShowRowErrors = false;
-            this.timerLog.Size = new System.Drawing.Size(284, 210);
+            this.timerLog.Size = new System.Drawing.Size(284, 138);
             this.timerLog.TabIndex = 5;
             // 
             // showLog
             // 
             this.showLog.BackColor = System.Drawing.SystemColors.ControlLight;
             this.showLog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.showLog.FlatAppearance.BorderSize = 0;
             this.showLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showLog.Image = global::Timer.Properties.Resources.showLogDown;
-            this.showLog.Location = new System.Drawing.Point(12, 103);
+            this.showLog.Location = new System.Drawing.Point(0, 102);
             this.showLog.Name = "showLog";
-            this.showLog.Size = new System.Drawing.Size(285, 15);
+            this.showLog.Size = new System.Drawing.Size(309, 15);
             this.showLog.TabIndex = 6;
             this.showLog.UseVisualStyleBackColor = false;
             this.showLog.Click += new System.EventHandler(this.showLog_Click);
@@ -186,7 +187,7 @@ namespace Timer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.exitButton;
-            this.ClientSize = new System.Drawing.Size(309, 126);
+            this.ClientSize = new System.Drawing.Size(309, 116);
             this.ControlBox = false;
             this.Controls.Add(this.showLog);
             this.Controls.Add(this.timerLog);

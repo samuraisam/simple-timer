@@ -273,7 +273,7 @@ namespace Timer
         {
             if (!this.showingLog)
             {
-                while (this.Height < 370)
+                while (this.Height < 300)
                 {
                     this.Height += 20;
                     this.Refresh();
@@ -283,7 +283,7 @@ namespace Timer
             }
             else
             {
-                while (this.Height > 150)
+                while (this.Height > 140)
                 {
                     this.Height -= 20;
                     this.Refresh();
@@ -302,7 +302,8 @@ namespace Timer
             this.timerLog.Rows.Add(
                 this.timerStarted.ToString("T"),
                 DateTime.Now.ToString("T"),
-                String.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds)
+                String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10)
             );
         }
     }
