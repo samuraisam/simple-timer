@@ -35,6 +35,8 @@ namespace Timer
                 try
                 {
                     this.actHook = new UserActivityHook();
+                    this.actHook.KeyDown += new KeyEventHandler(GlobalKeyDownHandler);
+                    this.actHook.KeyUp += new KeyEventHandler(GlobalKeyUpHandler);
                 }
                 catch
                 {
@@ -47,8 +49,6 @@ namespace Timer
                     );
                     this.useKeyCommands = false;
                 }
-                this.actHook.KeyDown += new KeyEventHandler(GlobalKeyDownHandler);
-                this.actHook.KeyUp += new KeyEventHandler(GlobalKeyUpHandler);
             }
 
             this.InitializeComponent();
