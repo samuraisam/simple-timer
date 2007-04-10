@@ -37,11 +37,19 @@ namespace Timer
             this.exitButton = new System.Windows.Forms.Button();
             this.renameButton = new System.Windows.Forms.Button();
             this.timerLog = new System.Windows.Forms.DataGridView();
-            this.showLog = new System.Windows.Forms.Button();
             this.startColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stopColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.beepAtMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dontBeepAtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.every5MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.every10MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.every15MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.everyHourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showLog = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timerLog)).BeginInit();
+            this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // timerMain
@@ -147,20 +155,6 @@ namespace Timer
             this.timerLog.Size = new System.Drawing.Size(284, 138);
             this.timerLog.TabIndex = 5;
             // 
-            // showLog
-            // 
-            this.showLog.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.showLog.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.showLog.FlatAppearance.BorderSize = 0;
-            this.showLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.showLog.Image = global::Timer.Properties.Resources.showLogDown;
-            this.showLog.Location = new System.Drawing.Point(0, 102);
-            this.showLog.Name = "showLog";
-            this.showLog.Size = new System.Drawing.Size(309, 15);
-            this.showLog.TabIndex = 6;
-            this.showLog.UseVisualStyleBackColor = false;
-            this.showLog.Click += new System.EventHandler(this.showLog_Click);
-            // 
             // startColumn
             // 
             this.startColumn.HeaderText = "Start";
@@ -182,12 +176,79 @@ namespace Timer
             this.timeColumn.Name = "timeColumn";
             this.timeColumn.ReadOnly = true;
             // 
+            // contextMenu
+            // 
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.beepAtMeToolStripMenuItem});
+            this.contextMenu.Name = "contextMenu";
+            this.contextMenu.Size = new System.Drawing.Size(141, 26);
+            this.contextMenu.Text = "Timer Preferences";
+            // 
+            // beepAtMeToolStripMenuItem
+            // 
+            this.beepAtMeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dontBeepAtToolStripMenuItem,
+            this.every5MinutesToolStripMenuItem,
+            this.every10MinutesToolStripMenuItem,
+            this.every15MinutesToolStripMenuItem,
+            this.everyHourToolStripMenuItem});
+            this.beepAtMeToolStripMenuItem.Image = global::Timer.Properties.Resources.clock;
+            this.beepAtMeToolStripMenuItem.Name = "beepAtMeToolStripMenuItem";
+            this.beepAtMeToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.beepAtMeToolStripMenuItem.Text = "Beep At Me";
+            // 
+            // dontBeepAtToolStripMenuItem
+            // 
+            this.dontBeepAtToolStripMenuItem.Checked = true;
+            this.dontBeepAtToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.dontBeepAtToolStripMenuItem.Name = "dontBeepAtToolStripMenuItem";
+            this.dontBeepAtToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.dontBeepAtToolStripMenuItem.Text = "Don\'t Beep At Me";
+            // 
+            // every5MinutesToolStripMenuItem
+            // 
+            this.every5MinutesToolStripMenuItem.Name = "every5MinutesToolStripMenuItem";
+            this.every5MinutesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.every5MinutesToolStripMenuItem.Text = "Every 5 Minutes";
+            // 
+            // every10MinutesToolStripMenuItem
+            // 
+            this.every10MinutesToolStripMenuItem.Name = "every10MinutesToolStripMenuItem";
+            this.every10MinutesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.every10MinutesToolStripMenuItem.Text = "Every 10 Minutes";
+            // 
+            // every15MinutesToolStripMenuItem
+            // 
+            this.every15MinutesToolStripMenuItem.Name = "every15MinutesToolStripMenuItem";
+            this.every15MinutesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.every15MinutesToolStripMenuItem.Text = "Every 30 Minutes";
+            // 
+            // everyHourToolStripMenuItem
+            // 
+            this.everyHourToolStripMenuItem.Name = "everyHourToolStripMenuItem";
+            this.everyHourToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.everyHourToolStripMenuItem.Text = "Every Hour";
+            // 
+            // showLog
+            // 
+            this.showLog.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.showLog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.showLog.FlatAppearance.BorderSize = 0;
+            this.showLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showLog.Image = global::Timer.Properties.Resources.showLogDown;
+            this.showLog.Location = new System.Drawing.Point(0, 102);
+            this.showLog.Name = "showLog";
+            this.showLog.Size = new System.Drawing.Size(309, 15);
+            this.showLog.TabIndex = 6;
+            this.showLog.UseVisualStyleBackColor = false;
+            this.showLog.Click += new System.EventHandler(this.showLog_Click);
+            // 
             // Timer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.exitButton;
             this.ClientSize = new System.Drawing.Size(309, 116);
+            this.ContextMenuStrip = this.contextMenu;
             this.ControlBox = false;
             this.Controls.Add(this.showLog);
             this.Controls.Add(this.timerLog);
@@ -202,6 +263,7 @@ namespace Timer
             this.Opacity = 0.95;
             this.Text = "Timer";
             ((System.ComponentModel.ISupportInitialize)(this.timerLog)).EndInit();
+            this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,6 +282,13 @@ namespace Timer
         private System.Windows.Forms.DataGridViewTextBoxColumn startColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn stopColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeColumn;
+        private System.Windows.Forms.ContextMenuStrip contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem beepAtMeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem every5MinutesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem every10MinutesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem every15MinutesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem everyHourToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dontBeepAtToolStripMenuItem;
     }
 }
 
