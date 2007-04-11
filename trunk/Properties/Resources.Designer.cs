@@ -60,6 +60,13 @@ namespace Timer.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap bell {
+            get {
+                object obj = ResourceManager.GetObject("bell", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap showLogDown {
             get {
                 object obj = ResourceManager.GetObject("showLogDown", resourceCulture);
@@ -70,6 +77,13 @@ namespace Timer.Properties {
         internal static System.Drawing.Bitmap showLogUp {
             get {
                 object obj = ResourceManager.GetObject("showLogUp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap world {
+            get {
+                object obj = ResourceManager.GetObject("world", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

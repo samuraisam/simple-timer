@@ -113,6 +113,9 @@
     <None Include="Resources\aarow-down.png" />
     <None Include="Resources\arrow-up.png" />
     <None Include="Resources\clock.png" />
+    <None Include="Resources\control_play_blue.png" />
+    <None Include="Resources\bell.png" />
+    <None Include="Resources\world.png" />
     <Content Include="Timer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
