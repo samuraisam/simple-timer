@@ -18,6 +18,7 @@ namespace Timer
         private ResourceManager resman;
         private ContextMenu taskbarMenu;
         private DateTime timerStarted;
+        private int beepInterval = 0;
         private bool isAltDown = false;
         private bool isSpcDown = false;
         private bool isCrtlDown = false;
@@ -31,6 +32,7 @@ namespace Timer
         public Timer()
         {
             this.stopwatch = new Stopwatch();
+            this.beepStopwatch = new Stopwatch();
             this.useKeyCommands = this.DetectKeyCommands();
 
             this.resman = new ResourceManager("Timer.Properties.Resources", this.GetType().Assembly);
@@ -225,7 +227,7 @@ namespace Timer
         {
             if (this.stopwatch.IsRunning)
             {
-                TimeSpan ts = stopwatch.Elapsed;
+                TimeSpan ts = this.stopwatch.Elapsed;
                 this.timeDisplay.Text = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                     ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds/10);
             }
@@ -306,6 +308,46 @@ namespace Timer
                 String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                     ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10)
             );
+        }
+
+        private void beepMenuItem_Click(object sender, EventArgs e)
+        {
+            // uncheck non-clicked-on items and check the clicked on items
+            foreach (ToolStripMenuItem i in beepAtMeToolStripMenuItem.DropDownItems)
+            {
+                if (sender == i)
+                    i.Checked = true;
+                else
+                    i.Checked = false;
+            }
+            int interval = Convert.ToInt32(((ToolStripMenuItem)sender).Tag);
+
+            if (interval != this.beepInterval && interval == 0)
+            {
+                this.beepStopwatch.Stop();
+                this.beepStopwatch.Reset();
+            }
+            else if (interval != this.beepInterval)
+            {
+                if (this.beepStopwatch.IsRunning)
+                    this.beepStopwatch.Stop();
+                this.beepStopwatch.Reset();
+                this.beepStopwatch.Start();
+            }
+            this.beepInterval = interval;
+        }
+
+        private Stopwatch beepStopwatch;
+        private void timerMain_Tick_BeepController(object sender, EventArgs e)
+        {
+            if (this.beepInterval == 0)
+                return; // bail early to save resources
+            if (this.beepStopwatch.IsRunning)
+            {
+                TimeSpan ts = this.beepStopwatch.Elapsed;
+                if (ts.Minutes == beepInterval)
+                    System.Console.Beep();
+            }
         }
     }
 }
