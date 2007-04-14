@@ -67,6 +67,20 @@ namespace Timer.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap clock48icon {
+            get {
+                object obj = ResourceManager.GetObject("clock48icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap quitTimer {
+            get {
+                object obj = ResourceManager.GetObject("quitTimer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap showLogDown {
             get {
                 object obj = ResourceManager.GetObject("showLogDown", resourceCulture);
@@ -77,6 +91,34 @@ namespace Timer.Properties {
         internal static System.Drawing.Bitmap showLogUp {
             get {
                 object obj = ResourceManager.GetObject("showLogUp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap text_replace {
+            get {
+                object obj = ResourceManager.GetObject("text_replace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap timerReset {
+            get {
+                object obj = ResourceManager.GetObject("timerReset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap timerStart {
+            get {
+                object obj = ResourceManager.GetObject("timerStart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap timerStop {
+            get {
+                object obj = ResourceManager.GetObject("timerStop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
