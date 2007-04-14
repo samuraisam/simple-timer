@@ -70,7 +70,6 @@ namespace Timer
 
             this.InitializeCustomComponents();
             this.InitializeComponent();
-            this.InitializeTaskbarMenu();
 
             this.SetName();
         }
@@ -130,6 +129,17 @@ namespace Timer
             this.exitButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
 
+            //
+            //  taskbarMenu
+            //
+            this.taskbarMenu = new ContextMenu();
+            this.taskbarMenu.MenuItems.Add("Start", new EventHandler(startButton_Click));
+            this.taskbarMenu.MenuItems.Add("Reset", new EventHandler(resetButton_Click));
+            this.taskbarMenu.MenuItems.Add(new MenuItem("-"));
+            this.taskbarMenu.MenuItems.Add("Rename", new EventHandler(renameButton_Click));
+            this.taskbarMenu.MenuItems.Add(new MenuItem("-"));
+            this.taskbarMenu.MenuItems.Add("Exit", new EventHandler(exitButton_Click));
+
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.exitButton);
@@ -176,20 +186,6 @@ namespace Timer
                 return false;
             else
                 return true;
-        }
-
-        /// <summary>
-        /// Creates the contextual menu for the taskbar.
-        /// </summary>
-        private void InitializeTaskbarMenu()
-        {
-            this.taskbarMenu = new ContextMenu();
-            this.taskbarMenu.MenuItems.Add("Start", new EventHandler(startButton_Click));
-            this.taskbarMenu.MenuItems.Add("Reset", new EventHandler(resetButton_Click));
-            this.taskbarMenu.MenuItems.Add(new MenuItem("-"));
-            this.taskbarMenu.MenuItems.Add("Rename", new EventHandler(renameButton_Click));
-            this.taskbarMenu.MenuItems.Add(new MenuItem("-"));
-            this.taskbarMenu.MenuItems.Add("Exit", new EventHandler(exitButton_Click));
         }
 
         /// <summary>
