@@ -36,9 +36,10 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,6 +58,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="NameTimer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +81,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="About.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NameTimer.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NameTimer.cs</DependentUpon>
@@ -113,9 +127,13 @@
     <None Include="Resources\aarow-down.png" />
     <None Include="Resources\arrow-up.png" />
     <None Include="Resources\clock.png" />
-    <None Include="Resources\control_play_blue.png" />
     <None Include="Resources\bell.png" />
     <None Include="Resources\world.png" />
+    <None Include="Resources\text_replace.png" />
+    <None Include="Resources\media-playback-start.png" />
+    <None Include="Resources\media-playback-pause.png" />
+    <None Include="Resources\media-playback-stop.png" />
+    <None Include="Resources\process-stop.png" />
     <Content Include="Timer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -7,7 +7,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+
 using gma.System.Windows;
+using OOGroup;
 
 namespace Timer
 {
@@ -18,6 +20,14 @@ namespace Timer
         private ResourceManager resman;
         private ContextMenu taskbarMenu;
         private DateTime timerStarted;
+        private Stopwatch beepStopwatch;
+
+        #region custom components
+        private OOGroup.Windows.Forms.ImageButton startButton;
+        private OOGroup.Windows.Forms.ImageButton resetButton;
+        private OOGroup.Windows.Forms.ImageButton exitButton;
+        #endregion
+
         private int beepInterval = 0;
         private bool isAltDown = false;
         private bool isSpcDown = false;
@@ -58,11 +68,73 @@ namespace Timer
                 }
             }
 
+            this.InitializeCustomComponents();
             this.InitializeComponent();
             this.InitializeTaskbarMenu();
 
             this.SetName();
         }
+
+        #region custom components
+        private void InitializeCustomComponents()
+        {
+            //
+            //  startButton
+            //
+            this.startButton = new OOGroup.Windows.Forms.ImageButton();
+            this.startButton.SetImage(
+                (System.Drawing.Bitmap)(resman.GetObject("timerStart")),
+                OOGroup.Windows.Forms.ImageButton.Alignment.Left
+            );
+            this.startButton.Text = "Start";
+            this.startButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startButton.Location = new System.Drawing.Point(13, 60);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(114, 38);
+            this.startButton.TabIndex = 1;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+
+            // 
+            //  resetButton
+            // 
+            this.resetButton = new OOGroup.Windows.Forms.ImageButton();
+            this.resetButton.SetImage(
+                (System.Drawing.Bitmap)(resman.GetObject("timerReset")),
+                OOGroup.Windows.Forms.ImageButton.Alignment.Left
+            );
+            this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetButton.Location = new System.Drawing.Point(133, 60);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(88, 38);
+            this.resetButton.TabIndex = 2;
+            this.resetButton.Text = "Reset";
+            this.resetButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            
+            // 
+            //  exitButton
+            // 
+            this.exitButton = new OOGroup.Windows.Forms.ImageButton();
+            this.exitButton.SetImage(
+                (System.Drawing.Bitmap)(resman.GetObject("quitTimer")),
+                OOGroup.Windows.Forms.ImageButton.Alignment.Left
+            );
+            this.exitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitButton.Location = new System.Drawing.Point(227, 60);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(70, 38);
+            this.exitButton.TabIndex = 3;
+            this.exitButton.Text = "Exit";
+            this.exitButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.resetButton);
+            this.Controls.Add(this.exitButton);
+        }
+        #endregion
 
         /// <summary>
         /// Quits Timer
@@ -211,6 +283,10 @@ namespace Timer
             {
                 this.stopwatch.Stop();
                 this.startButton.Text = "Start";
+                this.startButton.SetImage(
+                    (System.Drawing.Bitmap)(resman.GetObject("timerStart")),
+                    OOGroup.Windows.Forms.ImageButton.Alignment.Left
+                );
                 this.taskbarMenu.MenuItems[0].Text = "Start"; // ugly, i know...
                 this.UpdateLog();
             }
@@ -218,6 +294,10 @@ namespace Timer
             {
                 this.stopwatch.Start();
                 this.startButton.Text = "Stop";
+                this.startButton.SetImage(
+                    (System.Drawing.Bitmap)(resman.GetObject("timerStop")),
+                    OOGroup.Windows.Forms.ImageButton.Alignment.Left
+                );
                 this.taskbarMenu.MenuItems[0].Text = "Stop";
                 this.timerStarted = DateTime.Now;
             }
@@ -337,8 +417,7 @@ namespace Timer
             this.beepInterval = interval;
         }
 
-        private Stopwatch beepStopwatch;
-        private void timerMain_Tick_BeepController(object sender, EventArgs e)
+        private void beepTimer_Tick(object sender, EventArgs e)
         {
             if (this.beepInterval == 0)
                 return; // bail early to save resources
@@ -348,6 +427,12 @@ namespace Timer
                 if (ts.Minutes == beepInterval)
                     System.Console.Beep();
             }
+        }
+
+        private void aboutTimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About aboutDialog = new About();
+            DialogResult re = aboutDialog.ShowDialog();
         }
     }
 }

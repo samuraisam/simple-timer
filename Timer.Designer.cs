@@ -32,25 +32,23 @@ namespace Timer
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Timer));
             this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.timeDisplay = new System.Windows.Forms.TextBox();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
             this.timerLog = new System.Windows.Forms.DataGridView();
             this.startColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stopColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.remindRightClick = new System.Windows.Forms.ToolTip(this.components);
+            this.beepTimer = new System.Windows.Forms.Timer(this.components);
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beepAtMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dontBeepAtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every5MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every10MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every15MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.everyHourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renameButton = new System.Windows.Forms.Button();
-            this.startButton = new System.Windows.Forms.Button();
             this.showLog = new System.Windows.Forms.Button();
-            this.remindRightClick = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.timerLog)).BeginInit();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +57,7 @@ namespace Timer
             // 
             this.timerMain.Enabled = true;
             this.timerMain.Interval = 50;
-            this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick_BeepController);
+            this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
             // 
             // timeDisplay
             // 
@@ -69,39 +67,6 @@ namespace Timer
             this.timeDisplay.ReadOnly = true;
             this.timeDisplay.Size = new System.Drawing.Size(285, 41);
             this.timeDisplay.TabIndex = 0;
-            // 
-            // resetButton
-            // 
-            this.resetButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.resetButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
-            this.resetButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetButton.Location = new System.Drawing.Point(109, 59);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(55, 38);
-            this.resetButton.TabIndex = 2;
-            this.resetButton.Text = "Reset";
-            this.resetButton.UseVisualStyleBackColor = false;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
-            // exitButton
-            // 
-            this.exitButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.exitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.exitButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
-            this.exitButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.exitButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(250, 59);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(47, 38);
-            this.exitButton.TabIndex = 3;
-            this.exitButton.Text = "Exit";
-            this.exitButton.UseVisualStyleBackColor = false;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // timerLog
             // 
@@ -150,12 +115,39 @@ namespace Timer
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renameToolStripMenuItem,
             this.beepAtMeToolStripMenuItem,
             this.toolStripSeparator1,
             this.aboutTimerToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(144, 54);
+            this.contextMenu.Size = new System.Drawing.Size(144, 76);
             this.contextMenu.Text = "Timer Preferences";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
+            // 
+            // remindRightClick
+            // 
+            this.remindRightClick.AutoPopDelay = 5000;
+            this.remindRightClick.InitialDelay = 300;
+            this.remindRightClick.IsBalloon = true;
+            this.remindRightClick.ReshowDelay = 200;
+            this.remindRightClick.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.remindRightClick.ToolTipTitle = "More Options for Timer";
+            // 
+            // beepTimer
+            // 
+            this.beepTimer.Tick += new System.EventHandler(this.beepTimer_Tick);
+            // 
+            // renameToolStripMenuItem
+            // 
+            this.renameToolStripMenuItem.Image = global::Timer.Properties.Resources.text_replace;
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.renameToolStripMenuItem.Text = "Rename";
+            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameButton_Click);
             // 
             // beepAtMeToolStripMenuItem
             // 
@@ -212,50 +204,13 @@ namespace Timer
             this.everyHourToolStripMenuItem.Text = "Every Hour";
             this.everyHourToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
-            // 
             // aboutTimerToolStripMenuItem
             // 
             this.aboutTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.world;
             this.aboutTimerToolStripMenuItem.Name = "aboutTimerToolStripMenuItem";
             this.aboutTimerToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.aboutTimerToolStripMenuItem.Text = "About Timer";
-            // 
-            // renameButton
-            // 
-            this.renameButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.renameButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
-            this.renameButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.renameButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.renameButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.renameButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.renameButton.Location = new System.Drawing.Point(170, 59);
-            this.renameButton.Name = "renameButton";
-            this.renameButton.Size = new System.Drawing.Size(74, 38);
-            this.renameButton.TabIndex = 4;
-            this.renameButton.Text = "Rename";
-            this.renameButton.UseVisualStyleBackColor = false;
-            this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
-            // 
-            // startButton
-            // 
-            this.startButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.startButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
-            this.startButton.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.startButton.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.startButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.startButton.Location = new System.Drawing.Point(12, 59);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(91, 38);
-            this.startButton.TabIndex = 1;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = false;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            this.aboutTimerToolStripMenuItem.Click += new System.EventHandler(this.aboutTimerToolStripMenuItem_Click);
             // 
             // showLog
             // 
@@ -271,28 +226,16 @@ namespace Timer
             this.showLog.UseVisualStyleBackColor = false;
             this.showLog.Click += new System.EventHandler(this.showLog_Click);
             // 
-            // remindRightClick
-            // 
-            this.remindRightClick.AutoPopDelay = 5000;
-            this.remindRightClick.InitialDelay = 300;
-            this.remindRightClick.IsBalloon = true;
-            this.remindRightClick.ReshowDelay = 200;
-            this.remindRightClick.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.remindRightClick.ToolTipTitle = "More Options for Timer";
-            // 
             // Timer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(309, 116);
             this.ContextMenuStrip = this.contextMenu;
             this.ControlBox = false;
             this.Controls.Add(this.showLog);
             this.Controls.Add(this.timerLog);
-            this.Controls.Add(this.exitButton);
-            this.Controls.Add(this.renameButton);
-            this.Controls.Add(this.resetButton);
-            this.Controls.Add(this.startButton);
             this.Controls.Add(this.timeDisplay);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -311,9 +254,6 @@ namespace Timer
 
         private System.Windows.Forms.Timer timerMain;
         private System.Windows.Forms.TextBox timeDisplay;
-        private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.DataGridView timerLog;
         private System.Windows.Forms.Button showLog;
         private System.Windows.Forms.DataGridViewTextBoxColumn startColumn;
@@ -326,10 +266,11 @@ namespace Timer
         private System.Windows.Forms.ToolStripMenuItem every15MinutesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem everyHourToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dontBeepAtToolStripMenuItem;
-        private System.Windows.Forms.Button renameButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem aboutTimerToolStripMenuItem;
         private System.Windows.Forms.ToolTip remindRightClick;
+        private System.Windows.Forms.Timer beepTimer;
+        private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
     }
 }
 
