@@ -61,6 +61,7 @@ namespace Timer
             // 
             // timeDisplay
             // 
+            this.timeDisplay.BackColor = System.Drawing.SystemColors.ControlLight;
             this.timeDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeDisplay.Location = new System.Drawing.Point(12, 12);
             this.timeDisplay.Name = "timeDisplay";

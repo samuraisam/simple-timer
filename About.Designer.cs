@@ -40,7 +40,7 @@ namespace Timer
             // 
             this.closeAboutButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.closeAboutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeAboutButton.Location = new System.Drawing.Point(253, 208);
+            this.closeAboutButton.Location = new System.Drawing.Point(282, 208);
             this.closeAboutButton.Name = "closeAboutButton";
             this.closeAboutButton.Size = new System.Drawing.Size(69, 23);
             this.closeAboutButton.TabIndex = 0;
@@ -53,7 +53,7 @@ namespace Timer
             this.richTextBox1.Location = new System.Drawing.Point(12, 69);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(310, 133);
+            this.richTextBox1.Size = new System.Drawing.Size(339, 133);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
@@ -81,7 +81,7 @@ namespace Timer
             this.AcceptButton = this.closeAboutButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 242);
+            this.ClientSize = new System.Drawing.Size(363, 242);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
