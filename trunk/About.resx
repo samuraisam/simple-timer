@@ -120,9 +120,19 @@
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>Timer is designed to be an example of elegant interface design.
 
-It's simple interface is meant to provide a low barrier-of-entry for new users while remaining secretely powerful for those users who need it.
+It's simple interface is meant to provide a low barrier-of-entry for new users while remaining secretely powerful for those users who need it. All components are native to your UI, therefore Timer will look "built-in" on XP, Vista and all themed variants thereof.
 
-Parts of the program are from other open source projects and/or libraries. Silk Icons (http://www.famfamfam.com/lab/icons/silk/) and UserActivityHook (http://www.codeproject.com/csharp/globalhook.asp) are both used in the core functionality. Everything else is by Samuel Sutch &lt;mailto:samuraiblog@gmail.com&gt;.
+Parts of the program are from other open source projects and/or libraries:
+  o  Silk Icons (famfamfam)
+         http://www.famfamfam.com/lab/icons/silk/ 
+  o  UserActivityHook (George Mamaladze)
+        http://www.codeproject.com/csharp/globalhook.asp
+  o  Tango Desktop Project (Freedesktop.org)
+        http://tango.freedesktop.org/Tango_Desktop_Project
+  o  ImageButton (Michael Ganss)
+        http://www.codeproject.com/cs/miscctrl/MgXpImageButton.asp
+
+Everything else by Samuel Sutch &lt;mailto:samuraiblog@gmail.com&gt;
 
 Thanks for using Timer!</value>
   </data>
