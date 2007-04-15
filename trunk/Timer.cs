@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Reflection;
 
 using gma.System.Windows;
 using OOGroup;
@@ -15,12 +16,12 @@ namespace Timer
 {
     public partial class Timer : Form
     {
-        private Stopwatch stopwatch;
         UserActivityHook actHook;
         private ResourceManager resman;
         private ContextMenu taskbarMenu;
         private DateTime timerStarted;
-        private Stopwatch beepStopwatch;
+        private Dictionary<int, Beeper> beepers;
+        public TimerObject timerObject;
 
         #region custom components
         private OOGroup.Windows.Forms.ImageButton startButton;
@@ -28,7 +29,6 @@ namespace Timer
         private OOGroup.Windows.Forms.ImageButton exitButton;
         #endregion
 
-        private int beepInterval = 0;
         private bool isAltDown = false;
         private bool isSpcDown = false;
         private bool isCrtlDown = false;
@@ -41,10 +41,10 @@ namespace Timer
         /// </summary>
         public Timer()
         {
-            this.stopwatch = new Stopwatch();
-            this.beepStopwatch = new Stopwatch();
             this.useKeyCommands = this.DetectKeyCommands();
-
+            this.beepers = new Dictionary<int, Beeper>();
+            this.timerObject = Timer.TimerObjectFactory("LapTimer", this); // default lap timer
+            
             this.resman = new ResourceManager("Timer.Properties.Resources", this.GetType().Assembly);
 
             if (this.useKeyCommands)
@@ -72,6 +72,15 @@ namespace Timer
             this.InitializeComponent();
 
             this.SetName();
+        }
+
+        public static TimerObject TimerObjectFactory(string name, Timer timer)
+        {
+            object[] parameters = new object[1];
+            parameters[0] = timer;
+            Type timerObjType = Type.GetType("Timer.LapTimer");
+            Object ret = Activator.CreateInstance(timerObjType, parameters);
+            return (TimerObject)ret;
         }
 
         #region custom components
@@ -273,11 +282,25 @@ namespace Timer
                 this.isCrtlDown = false;
         }
 
+        /// <summary>
+        /// Adds a row to the timerLog representing time started/stoped and total time taken.
+        /// </summary>
+        private void UpdateLog()
+        {
+            TimeSpan ts = DateTime.Now - this.timerStarted;
+            this.timerLog.Rows.Add(
+                this.timerStarted.ToString("T"),
+                DateTime.Now.ToString("T"),
+                String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10)
+            );
+        }
+
         private void startButton_Click(object sender, EventArgs e)
         {
-            if (stopwatch.IsRunning)
+            if (this.timerObject.IsRunning)
             {
-                this.stopwatch.Stop();
+                this.timerObject.Stop();
                 this.startButton.Text = "Start";
                 this.startButton.SetImage(
                     (System.Drawing.Bitmap)(resman.GetObject("timerStart")),
@@ -288,7 +311,7 @@ namespace Timer
             }
             else
             {
-                this.stopwatch.Start();
+                this.timerObject.Start();
                 this.startButton.Text = "Stop";
                 this.startButton.SetImage(
                     (System.Drawing.Bitmap)(resman.GetObject("timerStop")),
@@ -301,23 +324,18 @@ namespace Timer
 
         private void timerMain_Tick(object sender, EventArgs e)
         {
-            if (this.stopwatch.IsRunning)
-            {
-                TimeSpan ts = this.stopwatch.Elapsed;
-                this.timeDisplay.Text = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                    ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds/10);
-            }
+            this.timeDisplay.Text = this.timerObject.timerMain_Tick(sender, e);
         }
 
         private void resetButton_Click(object sender, EventArgs e)
         {
-            if (this.stopwatch.IsRunning)
+            if (this.timerObject.IsRunning)
             {
-                this.stopwatch.Stop();
+                this.timerObject.Stop();
                 this.startButton.Text = "Start";
             }
             this.timeDisplay.Text = "";
-            this.stopwatch.Reset();
+            this.timerObject.Reset();
             this.timerLog.Rows.Clear();
         }
 
@@ -373,68 +391,64 @@ namespace Timer
         }
 
         /// <summary>
-        /// Adds a row to the timerLog representing time started/stoped and total time taken.
+        /// Maintains dictionary of beeper objects. Removes unchecked beepers,
+        /// adds newly checked beepers.
         /// </summary>
-        private void UpdateLog()
-        {
-            TimeSpan ts = DateTime.Now - this.timerStarted;
-            this.timerLog.Rows.Add(
-                this.timerStarted.ToString("T"),
-                DateTime.Now.ToString("T"),
-                String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                    ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10)
-            );
-        }
-
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void beepMenuItem_Click(object sender, EventArgs e)
         {
-            // uncheck non-clicked-on items and check the clicked on items
+            int interval = Convert.ToInt32(((ToolStripMenuItem)sender).Tag);
             foreach (ToolStripMenuItem i in beepAtMeToolStripMenuItem.DropDownItems)
             {
-                if (sender == i)
-                    i.Checked = true;
-                else
+                if (sender == i && i.Checked)
+                {   // removing beeper
+                    this.beepers.Remove(interval);
                     i.Checked = false;
-            }
-            int interval = Convert.ToInt32(((ToolStripMenuItem)sender).Tag);
-
-            if (interval != this.beepInterval && interval == 0)
-            {
-                this.beepStopwatch.Stop();
-                this.beepStopwatch.Reset();
-            }
-            else if (interval != this.beepInterval)
-            {
-                if (this.beepStopwatch.IsRunning)
-                    this.beepStopwatch.Stop();
-                this.beepStopwatch.Reset();
-                this.beepStopwatch.Start();
-            }
-            this.beepInterval = interval;
-        }
-
-        private void beepTimer_Tick(object sender, EventArgs e)
-        {
-            if (this.beepInterval == 0)
-                return; // bail early to save resources
-            if (this.beepStopwatch.IsRunning)
-            {
-                TimeSpan ts = this.beepStopwatch.Elapsed;
-                if (ts.Minutes == beepInterval)
-                    System.Console.Beep();
+                }
+                else if (sender == i && !i.Checked)
+                {   // adding beeper
+                    i.Checked = true;
+                    this.beepers.Add(interval, new Beeper(this, interval));
+                }
             }
         }
 
         private void aboutTimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            About aboutDialog = new About();
+            About aboutDialog = new About(this);
             DialogResult re = aboutDialog.ShowDialog();
         }
 
         private void transparancyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Transparency t = new Transparency();
-            t.ShowCustomDialog(this);
+            Transparency transparencyDialog = new Transparency(this);
+            DialogResult re = transparencyDialog.ShowDialog();
+        }
+
+        private void countdownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Countdown countdownDialog = new Countdown(this);
+            DialogResult re = countdownDialog.ShowDialog();
+            if (this.timerObject.IsRunning)
+            {
+                this.startButton_Click(sender, e);
+            }
+            this.timerObject = new CountdownTimer(
+                this,
+                Convert.ToInt32(countdownDialog.hours.Value),
+                Convert.ToInt32(countdownDialog.minutes.Value),
+                Convert.ToInt32(countdownDialog.seconds.Value)
+            );
+        }
+
+        private void simpleTimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.timerObject.IsRunning)
+            {
+                this.startButton_Click(sender, e);
+            }
+            this.timerObject = new LapTimer(this);
         }
     }
 }

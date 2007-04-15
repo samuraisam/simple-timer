@@ -74,6 +74,13 @@ namespace Timer.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap clock_red {
+            get {
+                object obj = ResourceManager.GetObject("clock_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap clock48icon {
             get {
                 object obj = ResourceManager.GetObject("clock48icon", resourceCulture);

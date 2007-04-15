@@ -64,9 +64,19 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Beeper.cs" />
+    <Compile Include="Countdown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Countdown.Designer.cs">
+      <DependentUpon>Countdown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CountdownTimer.cs">
+    </Compile>
     <Compile Include="ImageButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="LapTimer.cs" />
     <Compile Include="NameTimer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +94,10 @@
     <EmbeddedResource Include="About.resx">
       <SubType>Designer</SubType>
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Countdown.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Countdown.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NameTimer.resx">
       <SubType>Designer</SubType>
@@ -118,6 +132,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TimerObject.cs">
+    </Compile>
     <Compile Include="Transparency.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +161,7 @@
     <None Include="Resources\media-playback-stop.png" />
     <None Include="Resources\process-stop.png" />
     <None Include="Resources\contrast.png" />
+    <None Include="Resources\clock_red.png" />
     <Content Include="Timer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

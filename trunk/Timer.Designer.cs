@@ -43,12 +43,11 @@ namespace Timer
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.extraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remindRightClick = new System.Windows.Forms.ToolTip(this.components);
-            this.beepTimer = new System.Windows.Forms.Timer(this.components);
+            this.simpleTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.countdownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beepAtMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dontBeepAtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every5MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every10MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every15MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,6 +122,7 @@ namespace Timer
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.functionalityToolStripMenuItem,
+            this.simpleTimerToolStripMenuItem,
             this.countdownToolStripMenuItem,
             this.toolStripSeparator2,
             this.preferencesToolStripMenuItem,
@@ -142,7 +142,7 @@ namespace Timer
             this.functionalityToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
             this.functionalityToolStripMenuItem.Name = "functionalityToolStripMenuItem";
             this.functionalityToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.functionalityToolStripMenuItem.Text = "Functionality";
+            this.functionalityToolStripMenuItem.Text = "Functions";
             // 
             // toolStripSeparator2
             // 
@@ -179,9 +179,13 @@ namespace Timer
             this.remindRightClick.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.remindRightClick.ToolTipTitle = "More Options for Timer";
             // 
-            // beepTimer
+            // simpleTimerToolStripMenuItem
             // 
-            this.beepTimer.Tick += new System.EventHandler(this.beepTimer_Tick);
+            this.simpleTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.clock_red;
+            this.simpleTimerToolStripMenuItem.Name = "simpleTimerToolStripMenuItem";
+            this.simpleTimerToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.simpleTimerToolStripMenuItem.Text = "Simple Timer";
+            this.simpleTimerToolStripMenuItem.Click += new System.EventHandler(this.simpleTimerToolStripMenuItem_Click);
             // 
             // countdownToolStripMenuItem
             // 
@@ -189,6 +193,7 @@ namespace Timer
             this.countdownToolStripMenuItem.Name = "countdownToolStripMenuItem";
             this.countdownToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.countdownToolStripMenuItem.Text = "Countdown...";
+            this.countdownToolStripMenuItem.Click += new System.EventHandler(this.countdownToolStripMenuItem_Click);
             // 
             // renameToolStripMenuItem
             // 
@@ -210,7 +215,6 @@ namespace Timer
             // beepAtMeToolStripMenuItem
             // 
             this.beepAtMeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dontBeepAtToolStripMenuItem,
             this.every5MinutesToolStripMenuItem,
             this.every10MinutesToolStripMenuItem,
             this.every15MinutesToolStripMenuItem,
@@ -219,16 +223,6 @@ namespace Timer
             this.beepAtMeToolStripMenuItem.Name = "beepAtMeToolStripMenuItem";
             this.beepAtMeToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.beepAtMeToolStripMenuItem.Text = "Beep At Me";
-            // 
-            // dontBeepAtToolStripMenuItem
-            // 
-            this.dontBeepAtToolStripMenuItem.Checked = true;
-            this.dontBeepAtToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.dontBeepAtToolStripMenuItem.Name = "dontBeepAtToolStripMenuItem";
-            this.dontBeepAtToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.dontBeepAtToolStripMenuItem.Tag = "0";
-            this.dontBeepAtToolStripMenuItem.Text = "Don\'t Beep At Me";
-            this.dontBeepAtToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
             // 
             // every5MinutesToolStripMenuItem
             // 
@@ -310,7 +304,7 @@ namespace Timer
 
         #endregion
 
-        private System.Windows.Forms.Timer timerMain;
+        public System.Windows.Forms.Timer timerMain;
         private System.Windows.Forms.TextBox timeDisplay;
         private System.Windows.Forms.DataGridView timerLog;
         private System.Windows.Forms.Button showLog;
@@ -323,11 +317,9 @@ namespace Timer
         private System.Windows.Forms.ToolStripMenuItem every10MinutesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem every15MinutesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem everyHourToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dontBeepAtToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem aboutTimerToolStripMenuItem;
         private System.Windows.Forms.ToolTip remindRightClick;
-        private System.Windows.Forms.Timer beepTimer;
         private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem countdownToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -335,6 +327,7 @@ namespace Timer
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem extraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transparencyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem simpleTimerToolStripMenuItem;
     }
 }
 
