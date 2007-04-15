@@ -433,7 +433,7 @@ namespace Timer
 
         private void transparancyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Transparancy t = new Transparancy();
+            Transparency t = new Transparency();
             t.ShowCustomDialog(this);
         }
     }
