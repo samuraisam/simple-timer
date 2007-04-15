@@ -29,6 +29,9 @@ namespace Timer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Timer));
             this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.timeDisplay = new System.Windows.Forms.TextBox();
@@ -43,6 +46,7 @@ namespace Timer
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.extraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remindRightClick = new System.Windows.Forms.ToolTip(this.components);
+            this.showLog = new System.Windows.Forms.Button();
             this.simpleTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.countdownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +57,6 @@ namespace Timer
             this.every15MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.everyHourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showLog = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timerLog)).BeginInit();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -79,16 +82,40 @@ namespace Timer
             this.timerLog.AllowUserToAddRows = false;
             this.timerLog.AllowUserToDeleteRows = false;
             this.timerLog.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.timerLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.timerLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.timerLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.startColumn,
             this.stopColumn,
             this.timeColumn});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.timerLog.DefaultCellStyle = dataGridViewCellStyle2;
             this.timerLog.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.timerLog.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.timerLog.Location = new System.Drawing.Point(13, 126);
             this.timerLog.Name = "timerLog";
             this.timerLog.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.timerLog.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.timerLog.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.timerLog.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timerLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -122,18 +149,18 @@ namespace Timer
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.functionalityToolStripMenuItem,
-            this.simpleTimerToolStripMenuItem,
-            this.countdownToolStripMenuItem,
             this.toolStripSeparator2,
             this.preferencesToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.extraToolStripMenuItem,
+            this.simpleTimerToolStripMenuItem,
+            this.countdownToolStripMenuItem,
             this.renameToolStripMenuItem,
             this.transparencyToolStripMenuItem,
             this.beepAtMeToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.extraToolStripMenuItem,
             this.aboutTimerToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(201, 236);
+            this.contextMenu.Size = new System.Drawing.Size(201, 214);
             this.contextMenu.Text = "Timer Preferences";
             // 
             // functionalityToolStripMenuItem
@@ -178,6 +205,20 @@ namespace Timer
             this.remindRightClick.ReshowDelay = 200;
             this.remindRightClick.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.remindRightClick.ToolTipTitle = "More Options for Timer";
+            // 
+            // showLog
+            // 
+            this.showLog.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.showLog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.showLog.FlatAppearance.BorderSize = 0;
+            this.showLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showLog.Image = global::Timer.Properties.Resources.showLogDown;
+            this.showLog.Location = new System.Drawing.Point(0, 102);
+            this.showLog.Name = "showLog";
+            this.showLog.Size = new System.Drawing.Size(309, 15);
+            this.showLog.TabIndex = 6;
+            this.showLog.UseVisualStyleBackColor = false;
+            this.showLog.Click += new System.EventHandler(this.showLog_Click);
             // 
             // simpleTimerToolStripMenuItem
             // 
@@ -264,20 +305,6 @@ namespace Timer
             this.aboutTimerToolStripMenuItem.Text = "About Timer";
             this.aboutTimerToolStripMenuItem.Click += new System.EventHandler(this.aboutTimerToolStripMenuItem_Click);
             // 
-            // showLog
-            // 
-            this.showLog.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.showLog.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.showLog.FlatAppearance.BorderSize = 0;
-            this.showLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.showLog.Image = global::Timer.Properties.Resources.showLogDown;
-            this.showLog.Location = new System.Drawing.Point(0, 102);
-            this.showLog.Name = "showLog";
-            this.showLog.Size = new System.Drawing.Size(309, 15);
-            this.showLog.TabIndex = 6;
-            this.showLog.UseVisualStyleBackColor = false;
-            this.showLog.Click += new System.EventHandler(this.showLog_Click);
-            // 
             // Timer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,7 +321,7 @@ namespace Timer
             this.Name = "Timer";
             this.Opacity = 0.95;
             this.Text = "Timer";
-            this.remindRightClick.SetToolTip(this, "To see more options for Timer right-click anywhere on this window.");
+            this.remindRightClick.SetToolTip(this, "To see more options for Timer, right-click anywhere on this window.");
             ((System.ComponentModel.ISupportInitialize)(this.timerLog)).EndInit();
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
