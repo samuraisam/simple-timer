@@ -37,10 +37,16 @@ namespace Timer
             this.stopColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.functionalityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.extraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remindRightClick = new System.Windows.Forms.ToolTip(this.components);
             this.beepTimer = new System.Windows.Forms.Timer(this.components);
+            this.countdownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transparancyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beepAtMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dontBeepAtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every5MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,18 +122,53 @@ namespace Timer
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.functionalityToolStripMenuItem,
+            this.countdownToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.preferencesToolStripMenuItem,
             this.renameToolStripMenuItem,
+            this.transparancyToolStripMenuItem,
             this.beepAtMeToolStripMenuItem,
             this.toolStripSeparator1,
+            this.extraToolStripMenuItem,
             this.aboutTimerToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(144, 76);
+            this.contextMenu.Size = new System.Drawing.Size(201, 214);
             this.contextMenu.Text = "Timer Preferences";
+            // 
+            // functionalityToolStripMenuItem
+            // 
+            this.functionalityToolStripMenuItem.Enabled = false;
+            this.functionalityToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.functionalityToolStripMenuItem.Name = "functionalityToolStripMenuItem";
+            this.functionalityToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.functionalityToolStripMenuItem.Text = "Functionality";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.Enabled = false;
+            this.preferencesToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
+            // 
+            // extraToolStripMenuItem
+            // 
+            this.extraToolStripMenuItem.Enabled = false;
+            this.extraToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.extraToolStripMenuItem.Name = "extraToolStripMenuItem";
+            this.extraToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.extraToolStripMenuItem.Text = "Extra";
             // 
             // remindRightClick
             // 
@@ -142,13 +183,29 @@ namespace Timer
             // 
             this.beepTimer.Tick += new System.EventHandler(this.beepTimer_Tick);
             // 
+            // countdownToolStripMenuItem
+            // 
+            this.countdownToolStripMenuItem.Image = global::Timer.Properties.Resources.clock;
+            this.countdownToolStripMenuItem.Name = "countdownToolStripMenuItem";
+            this.countdownToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.countdownToolStripMenuItem.Text = "Countdown...";
+            // 
             // renameToolStripMenuItem
             // 
             this.renameToolStripMenuItem.Image = global::Timer.Properties.Resources.text_replace;
             this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            this.renameToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.renameToolStripMenuItem.ShortcutKeyDisplayString = "Crtl+Alt+Sace";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.renameToolStripMenuItem.Text = "Rename";
             this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameButton_Click);
+            // 
+            // transparancyToolStripMenuItem
+            // 
+            this.transparancyToolStripMenuItem.Image = global::Timer.Properties.Resources.contrast;
+            this.transparancyToolStripMenuItem.Name = "transparancyToolStripMenuItem";
+            this.transparancyToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.transparancyToolStripMenuItem.Text = "Transparancy...";
+            this.transparancyToolStripMenuItem.Click += new System.EventHandler(this.transparancyToolStripMenuItem_Click);
             // 
             // beepAtMeToolStripMenuItem
             // 
@@ -160,7 +217,7 @@ namespace Timer
             this.everyHourToolStripMenuItem});
             this.beepAtMeToolStripMenuItem.Image = global::Timer.Properties.Resources.bell;
             this.beepAtMeToolStripMenuItem.Name = "beepAtMeToolStripMenuItem";
-            this.beepAtMeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.beepAtMeToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.beepAtMeToolStripMenuItem.Text = "Beep At Me";
             // 
             // dontBeepAtToolStripMenuItem
@@ -209,7 +266,7 @@ namespace Timer
             // 
             this.aboutTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.world;
             this.aboutTimerToolStripMenuItem.Name = "aboutTimerToolStripMenuItem";
-            this.aboutTimerToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.aboutTimerToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.aboutTimerToolStripMenuItem.Text = "About Timer";
             this.aboutTimerToolStripMenuItem.Click += new System.EventHandler(this.aboutTimerToolStripMenuItem_Click);
             // 
@@ -272,6 +329,12 @@ namespace Timer
         private System.Windows.Forms.ToolTip remindRightClick;
         private System.Windows.Forms.Timer beepTimer;
         private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem countdownToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem functionalityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem extraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transparancyToolStripMenuItem;
     }
 }
 
