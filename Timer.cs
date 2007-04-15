@@ -78,7 +78,7 @@ namespace Timer
         {
             object[] parameters = new object[1];
             parameters[0] = timer;
-            Type timerObjType = Type.GetType("Timer.LapTimer");
+            Type timerObjType = Type.GetType(String.Format("Timer.{0}", name));
             Object ret = Activator.CreateInstance(timerObjType, parameters);
             return (TimerObject)ret;
         }
