@@ -430,5 +430,11 @@ namespace Timer
             About aboutDialog = new About();
             DialogResult re = aboutDialog.ShowDialog();
         }
+
+        private void transparancyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Transparancy t = new Transparancy();
+            DialogResult re = t.ShowCustomDialog(this);
+        }
     }
 }
