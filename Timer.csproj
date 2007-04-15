@@ -154,7 +154,6 @@
     <None Include="Resources\arrow-up.png" />
     <None Include="Resources\clock.png" />
     <None Include="Resources\bell.png" />
-    <None Include="Resources\world.png" />
     <None Include="Resources\text_replace.png" />
     <None Include="Resources\media-playback-start.png" />
     <None Include="Resources\media-playback-pause.png" />
@@ -162,6 +161,7 @@
     <None Include="Resources\process-stop.png" />
     <None Include="Resources\contrast.png" />
     <None Include="Resources\clock_red.png" />
+    <None Include="Resources\information.png" />
     <Content Include="Timer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
