@@ -133,7 +133,7 @@ namespace Timer
             this.extraToolStripMenuItem,
             this.aboutTimerToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(201, 214);
+            this.contextMenu.Size = new System.Drawing.Size(201, 236);
             this.contextMenu.Text = "Timer Preferences";
             // 
             // functionalityToolStripMenuItem
@@ -184,7 +184,7 @@ namespace Timer
             this.simpleTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.clock_red;
             this.simpleTimerToolStripMenuItem.Name = "simpleTimerToolStripMenuItem";
             this.simpleTimerToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.simpleTimerToolStripMenuItem.Text = "Simple Timer";
+            this.simpleTimerToolStripMenuItem.Text = "Stopwatch (default)";
             this.simpleTimerToolStripMenuItem.Click += new System.EventHandler(this.simpleTimerToolStripMenuItem_Click);
             // 
             // countdownToolStripMenuItem
