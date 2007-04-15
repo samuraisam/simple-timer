@@ -332,6 +332,10 @@ namespace Timer
             if (this.timerObject.IsRunning)
             {
                 this.timerObject.Stop();
+                this.startButton.SetImage(
+                    (System.Drawing.Bitmap)(resman.GetObject("timerStart")),
+                    OOGroup.Windows.Forms.ImageButton.Alignment.Left
+                );
                 this.startButton.Text = "Start";
             }
             this.timeDisplay.Text = "";
