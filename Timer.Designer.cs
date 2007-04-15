@@ -46,7 +46,7 @@ namespace Timer
             this.beepTimer = new System.Windows.Forms.Timer(this.components);
             this.countdownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transparancyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transparencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beepAtMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dontBeepAtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every5MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,7 +127,7 @@ namespace Timer
             this.toolStripSeparator2,
             this.preferencesToolStripMenuItem,
             this.renameToolStripMenuItem,
-            this.transparancyToolStripMenuItem,
+            this.transparencyToolStripMenuItem,
             this.beepAtMeToolStripMenuItem,
             this.toolStripSeparator1,
             this.extraToolStripMenuItem,
@@ -199,13 +199,13 @@ namespace Timer
             this.renameToolStripMenuItem.Text = "Rename";
             this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameButton_Click);
             // 
-            // transparancyToolStripMenuItem
+            // transparencyToolStripMenuItem
             // 
-            this.transparancyToolStripMenuItem.Image = global::Timer.Properties.Resources.contrast;
-            this.transparancyToolStripMenuItem.Name = "transparancyToolStripMenuItem";
-            this.transparancyToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.transparancyToolStripMenuItem.Text = "Transparancy...";
-            this.transparancyToolStripMenuItem.Click += new System.EventHandler(this.transparancyToolStripMenuItem_Click);
+            this.transparencyToolStripMenuItem.Image = global::Timer.Properties.Resources.contrast;
+            this.transparencyToolStripMenuItem.Name = "transparencyToolStripMenuItem";
+            this.transparencyToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.transparencyToolStripMenuItem.Text = "Transparency...";
+            this.transparencyToolStripMenuItem.Click += new System.EventHandler(this.transparancyToolStripMenuItem_Click);
             // 
             // beepAtMeToolStripMenuItem
             // 
@@ -334,7 +334,7 @@ namespace Timer
         private System.Windows.Forms.ToolStripMenuItem functionalityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem extraToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem transparancyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transparencyToolStripMenuItem;
     }
 }
 
