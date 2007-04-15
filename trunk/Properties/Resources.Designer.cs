@@ -95,6 +95,13 @@ namespace Timer.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap information {
+            get {
+                object obj = ResourceManager.GetObject("information", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap quitTimer {
             get {
                 object obj = ResourceManager.GetObject("quitTimer", resourceCulture);
@@ -140,13 +147,6 @@ namespace Timer.Properties {
         internal static System.Drawing.Bitmap timerStop {
             get {
                 object obj = ResourceManager.GetObject("timerStop", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap world {
-            get {
-                object obj = ResourceManager.GetObject("world", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

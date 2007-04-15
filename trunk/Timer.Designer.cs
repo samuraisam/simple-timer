@@ -258,7 +258,7 @@ namespace Timer
             // 
             // aboutTimerToolStripMenuItem
             // 
-            this.aboutTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.world;
+            this.aboutTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.information;
             this.aboutTimerToolStripMenuItem.Name = "aboutTimerToolStripMenuItem";
             this.aboutTimerToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.aboutTimerToolStripMenuItem.Text = "About Timer";
