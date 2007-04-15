@@ -38,7 +38,7 @@ namespace Timer
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(29, 28);
+            this.trackBar1.Location = new System.Drawing.Point(31, 29);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Minimum = 5;
             this.trackBar1.Name = "trackBar1";
@@ -51,7 +51,7 @@ namespace Timer
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(71, 73);
+            this.okButton.Location = new System.Drawing.Point(214, 29);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 1;
@@ -62,7 +62,7 @@ namespace Timer
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 40);
+            this.label1.Location = new System.Drawing.Point(12, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 13);
             this.label1.TabIndex = 2;
@@ -71,7 +71,7 @@ namespace Timer
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(175, 40);
+            this.label2.Location = new System.Drawing.Point(175, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 3;
@@ -80,18 +80,18 @@ namespace Timer
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 9);
+            this.label3.Location = new System.Drawing.Point(12, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(181, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Adjust Transparancy Using the Slider";
             // 
-            // Transparancy
+            // Transparency
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(217, 107);
+            this.ClientSize = new System.Drawing.Size(300, 78);
             this.ControlBox = false;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -99,7 +99,7 @@ namespace Timer
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.trackBar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Transparancy";
+            this.Name = "Transparency";
             this.Text = "Timer Transparancy";
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
