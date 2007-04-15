@@ -10,8 +10,12 @@ namespace Timer
 {
     public partial class About : Form
     {
-        public About()
+        private Timer ParentTimer;
+
+        public About(Timer timer)
         {
+            this.ParentTimer = timer;
+            this.Opacity = timer.Opacity;
             InitializeComponent();
         }
     }
