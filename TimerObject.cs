@@ -16,5 +16,11 @@ namespace Timer
         {
             this.ParentTimer = timer;
         }
+
+        // re-declare reset, start and stop so we can override them in child classes
+        // as far as C# is considered... this is wicked bad
+        public virtual new void Reset() { base.Reset(); }
+        public virtual new void Start() { base.Start(); }
+        public virtual new void Stop() { base.Stop(); }
     }
 }

@@ -60,6 +60,13 @@ namespace Timer.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap application_double {
+            get {
+                object obj = ResourceManager.GetObject("application_double", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap bell {
             get {
                 object obj = ResourceManager.GetObject("bell", resourceCulture);

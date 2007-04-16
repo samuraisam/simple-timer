@@ -32,6 +32,20 @@ namespace Timer
                 Math.Abs(ts.Seconds), Math.Abs(ts.Milliseconds) / 10);
         }
 
+        /// <summary>
+        /// Override base class Reset so the next time we CalculateTimeLeft it
+        /// plays the alert and flashes the window.
+        /// </summary>
+        public override void Reset()
+        {
+            base.Reset();
+            this.playedAlert = false;
+        }
+
+        /// <summary>
+        /// Calculates time left in the timer and the time is right, alert the user. (attached
+        /// to timerMain_Tick in ParentTimer
+        /// </summary>
         private void CalculateTimeLeft(object sender, EventArgs e)
         {
             TimeSpan timeLeft = (this.Elapsed - this.countdownFrom);
@@ -40,6 +54,7 @@ namespace Timer
             {
                 SystemSounds.Exclamation.Play();
                 this.playedAlert = true;
+                this.ParentTimer.FlashWindow(3, false);
             }
         }
     }

@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Reflection;
+using System.Threading;
+using System.Runtime.InteropServices;
 
 using gma.System.Windows;
 using OOGroup;
@@ -16,7 +18,7 @@ namespace Timer
 {
     public partial class Timer : Form
     {
-        UserActivityHook actHook;
+        private UserActivityHook actHook;
         private ResourceManager resman;
         private ContextMenu taskbarMenu;
         private DateTime timerStarted;
@@ -43,8 +45,7 @@ namespace Timer
         {
             this.useKeyCommands = this.DetectKeyCommands();
             this.beepers = new Dictionary<int, Beeper>();
-            this.timerObject = Timer.TimerObjectFactory("LapTimer", this); // default lap timer
-            
+            this.timerObject = new LapTimer(this);
             this.resman = new ResourceManager("Timer.Properties.Resources", this.GetType().Assembly);
 
             if (this.useKeyCommands)
@@ -72,15 +73,10 @@ namespace Timer
             this.InitializeComponent();
 
             this.SetName();
-        }
 
-        public static TimerObject TimerObjectFactory(string name, Timer timer)
-        {
-            object[] parameters = new object[1];
-            parameters[0] = timer;
-            Type timerObjType = Type.GetType(String.Format("Timer.{0}", name));
-            Object ret = Activator.CreateInstance(timerObjType, parameters);
-            return (TimerObject)ret;
+            // the tooltip, which is integral to finding the extended functionality
+            // of timer, will not show up until starting the timer without this call to Focus
+            this.Focus();
         }
 
         #region custom components
@@ -158,8 +154,6 @@ namespace Timer
         /// <summary>
         /// Quits Timer
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void Quit(object sender, KeyEventArgs e)
         {
             if (e.KeyData.ToString() == "Escape")
@@ -201,7 +195,7 @@ namespace Timer
         /// Asks user for a name for this timer instance.
         /// </summary>
         /// <returns>Title for timer.</returns>
-        /// <exception>Exception</exception>
+        /// <exception>Exception (when the input is invalid)</exception>
         private string GetName()
         {
             NameTimer namer = new NameTimer();
@@ -241,8 +235,6 @@ namespace Timer
         /// Runs the key handlers if combinations are found. Also sets the
         /// internal state of the keys.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void GlobalKeyDownHandler(object sender, KeyEventArgs e)
         {
             string keyString = e.KeyData.ToString();
@@ -269,8 +261,6 @@ namespace Timer
         /// <summary>
         /// Does nothing other than reset the internal state of the keys
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void GlobalKeyUpHandler(object sender, KeyEventArgs e)
         {
             string keyString = e.KeyData.ToString();
@@ -296,6 +286,10 @@ namespace Timer
             );
         }
 
+        /// <summary>
+        /// Toggles between calling timer objects's start and stop method. Maintains Timer
+        /// interface for appropriate state.
+        /// </summary>
         private void startButton_Click(object sender, EventArgs e)
         {
             if (this.timerObject.IsRunning)
@@ -322,11 +316,19 @@ namespace Timer
             }
         }
 
+        /// <summary>
+        /// Calls timer object's timerMain_Tick method and sets timeDisplay's
+        /// text to whatever it returns.
+        /// </summary>
         private void timerMain_Tick(object sender, EventArgs e)
         {
             this.timeDisplay.Text = this.timerObject.timerMain_Tick(sender, e);
         }
 
+        /// <summary>
+        /// Calls timer objects Reset method and maintains Timer interface for a reset
+        /// timer object.
+        /// </summary>
         private void resetButton_Click(object sender, EventArgs e)
         {
             if (this.timerObject.IsRunning)
@@ -343,6 +345,9 @@ namespace Timer
             this.timerLog.Rows.Clear();
         }
 
+        /// <summary>
+        /// Immediatly quits the timer
+        /// </summary>
         private void exitButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -352,8 +357,6 @@ namespace Timer
         /// Renames this timer. Only asks once. If input is invalid, ignore it
         /// and don't change the name.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void renameButton_Click(object sender, EventArgs e)
         {
             string name;
@@ -368,8 +371,6 @@ namespace Timer
         /// <summary>
         /// Shows or hides the loging pane. Does a quick little transition for each one.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void showLog_Click(object sender, EventArgs e)
         {
             if (!this.showingLog)
@@ -398,8 +399,6 @@ namespace Timer
         /// Maintains dictionary of beeper objects. Removes unchecked beepers,
         /// adds newly checked beepers.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void beepMenuItem_Click(object sender, EventArgs e)
         {
             int interval = Convert.ToInt32(((ToolStripMenuItem)sender).Tag);
@@ -418,18 +417,27 @@ namespace Timer
             }
         }
 
+        /// <summary>
+        /// Show the about dialog
+        /// </summary>
         private void aboutTimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About aboutDialog = new About(this);
             DialogResult re = aboutDialog.ShowDialog();
         }
 
+        /// <summary>
+        /// Show the transparency dialog
+        /// </summary>
         private void transparancyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Transparency transparencyDialog = new Transparency(this);
             DialogResult re = transparencyDialog.ShowDialog();
         }
 
+        /// <summary>
+        /// Start a new CoutdownTimer
+        /// </summary>
         private void countdownToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Countdown countdownDialog = new Countdown(this);
@@ -445,7 +453,9 @@ namespace Timer
                 Convert.ToInt32(countdownDialog.seconds.Value)
             );
         }
-
+        /// <summary>
+        /// Start a new LapTimer
+        /// </summary>
         private void simpleTimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.timerObject.IsRunning)
@@ -453,6 +463,55 @@ namespace Timer
                 this.startButton_Click(sender, e);
             }
             this.timerObject = new LapTimer(this);
+        }
+
+        /// <summary>
+        /// Toggles the timer's stayOnTop status
+        /// </summary>
+        private void stayOnTopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem i = (ToolStripMenuItem)sender;
+            if (!this.TopMost)
+            {
+                i.BackColor = System.Drawing.SystemColors.ControlLight;
+                this.TopMost = true;
+            }
+            else if (this.TopMost)
+            {
+                i.BackColor = System.Drawing.SystemColors.Control;
+                this.TopMost = false;
+            }
+        }
+
+        /// <summary>
+        /// Flashes the window numTimes of times in another thread.
+        /// Specifying true for stayLit will make the window stay "flashed" after flashing.
+        /// </summary>
+        /// <param name="numTimes">Number of times to flash.</param>
+        /// <param name="stayLit">Keep the taskbar item highlit, default behavior
+        /// should be false. (don't want to annoy the user too much)</param>
+
+        [DllImport("user32.dll")]
+        public static extern int FlashWindow(IntPtr Hwnd, bool Revert);
+
+        public void FlashWindow(int numTimes, bool stayLit)
+        {
+            IntPtr handle = this.Handle;
+            Thread t = new Thread(delegate() // woot closures
+            {
+                for (int i = 0; i < numTimes; i++)
+                {
+                    Timer.FlashWindow(handle, false);
+                    Thread.Sleep(500);
+                    Timer.FlashWindow(handle, true);
+                    Thread.Sleep(500);
+                }
+                if (stayLit)
+                {
+                    Timer.FlashWindow(handle, false);
+                }
+            });
+            t.Start();
         }
     }
 }

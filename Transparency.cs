@@ -16,6 +16,7 @@ namespace Timer
         {
             this.ParentTimer = timer;
             this.Opacity = timer.Opacity;
+            this.TopMost = timer.TopMost;
             InitializeComponent();
 
             this.trackBar1.Value = (int)(timer.Opacity * 100.00);
