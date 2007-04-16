@@ -406,6 +406,7 @@ namespace Timer
             {
                 if (sender == i && i.Checked)
                 {   // removing beeper
+                    this.beepers[interval].StopAlerting();
                     this.beepers.Remove(interval);
                     i.Checked = false;
                 }
