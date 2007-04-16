@@ -443,16 +443,19 @@ namespace Timer
         {
             Countdown countdownDialog = new Countdown(this);
             DialogResult re = countdownDialog.ShowDialog();
-            if (this.timerObject.IsRunning)
+            if (re == DialogResult.OK) // don't do anything unless user clicked "OK"
             {
-                this.startButton_Click(sender, e);
+                if (this.timerObject.IsRunning)
+                {
+                    this.startButton_Click(sender, e);
+                }
+                this.timerObject = new CountdownTimer(
+                    this,
+                    Convert.ToInt32(countdownDialog.hours.Value),
+                    Convert.ToInt32(countdownDialog.minutes.Value),
+                    Convert.ToInt32(countdownDialog.seconds.Value)
+                );
             }
-            this.timerObject = new CountdownTimer(
-                this,
-                Convert.ToInt32(countdownDialog.hours.Value),
-                Convert.ToInt32(countdownDialog.minutes.Value),
-                Convert.ToInt32(countdownDialog.seconds.Value)
-            );
         }
         /// <summary>
         /// Start a new LapTimer
