@@ -27,7 +27,7 @@ namespace Timer
             if (this.ParentTimer.timerObject.IsRunning)
             {
                 TimeSpan ts = this.ParentTimer.timerObject.Elapsed;
-                bool canPlay = (DateTime.Now - this.lastPlayed).Seconds >= 1; // only play once every second
+                bool canPlay = (DateTime.Now - this.lastPlayed).Minutes >= this.interval; // only play once every interval
                 if (ts.Minutes % this.interval == 0 && canPlay && ts.Minutes != 0)
                     this.Alert();
             }
