@@ -13,6 +13,14 @@ namespace Timer
         private TimeSpan countdownFrom;
         private bool playedAlert;
 
+
+        /// <summary>
+        /// Starts a new countdown timer.
+        /// </summary>
+        /// <param name="timer">Timer parent to attach to.</param>
+        /// <param name="hours">Whole hours to count down from.</param>
+        /// <param name="minutes">Whole minutes to count down from.</param>
+        /// <param name="seconds">Whole seconds to count down from.</param>
         public CountdownTimer(Timer timer, int hours, int minutes, int seconds)
             : base(timer)
         {
@@ -21,6 +29,10 @@ namespace Timer
             this.ParentTimer.timerMain.Tick += new EventHandler(this.CalculateTimeLeft);
         }
 
+        /// <summary>
+        /// Returns a string to display on the timerDisplay.
+        /// </summary>
+        /// <returns>timerDisplay string</returns>
         public override string timerMain_Tick(object sender, EventArgs e)
         {
             TimeSpan ts = this.Elapsed - this.countdownFrom;
