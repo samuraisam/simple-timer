@@ -46,6 +46,7 @@ namespace Timer
             this.closeAboutButton.TabIndex = 0;
             this.closeAboutButton.Text = "Close";
             this.closeAboutButton.UseVisualStyleBackColor = true;
+            this.closeAboutButton.Click += new System.EventHandler(closeAboutButton_Click);
             // 
             // richTextBox1
             // 

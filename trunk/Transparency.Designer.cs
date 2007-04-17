@@ -57,6 +57,7 @@ namespace Timer
             this.okButton.TabIndex = 1;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(okButton_Click);
             // 
             // label1
             // 

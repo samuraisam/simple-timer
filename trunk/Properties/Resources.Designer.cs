@@ -102,6 +102,13 @@ namespace Timer.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap grips {
+            get {
+                object obj = ResourceManager.GetObject("grips", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap information {
             get {
                 object obj = ResourceManager.GetObject("information", resourceCulture);
