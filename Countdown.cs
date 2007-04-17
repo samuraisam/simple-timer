@@ -8,15 +8,11 @@ using System.Windows.Forms;
 
 namespace Timer
 {
-    public partial class Countdown : Form
+    public partial class Countdown : TimerChild
     {
-        private Timer ParentTimer;
-
         public Countdown(Timer timer)
+            : base(timer)
         {
-            this.ParentTimer = timer;
-            this.Opacity = timer.Opacity;
-            this.TopMost = timer.TopMost;
             InitializeComponent();
         }
     }

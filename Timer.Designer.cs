@@ -41,10 +41,13 @@ namespace Timer
             this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.functionalityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.simpleTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.countdownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.extraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.remindRightClick = new System.Windows.Forms.ToolTip(this.components);
+            this.simpleTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.countdownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stayOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,10 +56,7 @@ namespace Timer
             this.every10MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every15MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.everyHourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.extraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.remindRightClick = new System.Windows.Forms.ToolTip(this.components);
             this.showLog = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timerLog)).BeginInit();
             this.contextMenu.SuspendLayout();
@@ -77,6 +77,7 @@ namespace Timer
             this.timeDisplay.ReadOnly = true;
             this.timeDisplay.Size = new System.Drawing.Size(285, 41);
             this.timeDisplay.TabIndex = 0;
+            this.timeDisplay.DoubleClick += new System.EventHandler(this.timeDisplay_DoubleClick);
             // 
             // timerLog
             // 
@@ -162,7 +163,7 @@ namespace Timer
             this.extraToolStripMenuItem,
             this.aboutTimerToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(182, 236);
+            this.contextMenu.Size = new System.Drawing.Size(182, 258);
             this.contextMenu.Text = "Timer Preferences";
             // 
             // functionalityToolStripMenuItem
@@ -172,6 +173,41 @@ namespace Timer
             this.functionalityToolStripMenuItem.Name = "functionalityToolStripMenuItem";
             this.functionalityToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.functionalityToolStripMenuItem.Text = "Functions";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.Enabled = false;
+            this.preferencesToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            // 
+            // extraToolStripMenuItem
+            // 
+            this.extraToolStripMenuItem.Enabled = false;
+            this.extraToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.extraToolStripMenuItem.Name = "extraToolStripMenuItem";
+            this.extraToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.extraToolStripMenuItem.Text = "Extra";
+            // 
+            // remindRightClick
+            // 
+            this.remindRightClick.AutoPopDelay = 5000;
+            this.remindRightClick.InitialDelay = 300;
+            this.remindRightClick.IsBalloon = true;
+            this.remindRightClick.ReshowDelay = 200;
+            this.remindRightClick.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.remindRightClick.ToolTipTitle = "More Options for Timer";
             // 
             // simpleTimerToolStripMenuItem
             // 
@@ -188,19 +224,6 @@ namespace Timer
             this.countdownToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.countdownToolStripMenuItem.Text = "Countdown...";
             this.countdownToolStripMenuItem.Click += new System.EventHandler(this.countdownToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
-            // 
-            // preferencesToolStripMenuItem
-            // 
-            this.preferencesToolStripMenuItem.Enabled = false;
-            this.preferencesToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
-            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.preferencesToolStripMenuItem.Text = "Preferences";
             // 
             // renameToolStripMenuItem
             // 
@@ -272,19 +295,6 @@ namespace Timer
             this.everyHourToolStripMenuItem.Text = "Every Hour";
             this.everyHourToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
-            // 
-            // extraToolStripMenuItem
-            // 
-            this.extraToolStripMenuItem.Enabled = false;
-            this.extraToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
-            this.extraToolStripMenuItem.Name = "extraToolStripMenuItem";
-            this.extraToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.extraToolStripMenuItem.Text = "Extra";
-            // 
             // aboutTimerToolStripMenuItem
             // 
             this.aboutTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.information;
@@ -292,15 +302,6 @@ namespace Timer
             this.aboutTimerToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.aboutTimerToolStripMenuItem.Text = "About Timer";
             this.aboutTimerToolStripMenuItem.Click += new System.EventHandler(this.aboutTimerToolStripMenuItem_Click);
-            // 
-            // remindRightClick
-            // 
-            this.remindRightClick.AutoPopDelay = 5000;
-            this.remindRightClick.InitialDelay = 300;
-            this.remindRightClick.IsBalloon = true;
-            this.remindRightClick.ReshowDelay = 200;
-            this.remindRightClick.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.remindRightClick.ToolTipTitle = "More Options for Timer";
             // 
             // showLog
             // 
@@ -343,13 +344,11 @@ namespace Timer
         #endregion
 
         public System.Windows.Forms.Timer timerMain;
-        private System.Windows.Forms.TextBox timeDisplay;
         private System.Windows.Forms.DataGridView timerLog;
         private System.Windows.Forms.Button showLog;
         private System.Windows.Forms.DataGridViewTextBoxColumn startColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn stopColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeColumn;
-        private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem beepAtMeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem every5MinutesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem every10MinutesToolStripMenuItem;
@@ -367,6 +366,8 @@ namespace Timer
         private System.Windows.Forms.ToolStripMenuItem transparencyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem simpleTimerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stayOnTopToolStripMenuItem;
+        public System.Windows.Forms.TextBox timeDisplay;
+        public System.Windows.Forms.ContextMenuStrip contextMenu;
     }
 }
 

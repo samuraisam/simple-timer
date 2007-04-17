@@ -119,6 +119,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="TimerSmall.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TimerSmall.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Transparency.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Transparency.cs</DependentUpon>
@@ -139,7 +143,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TimerChild.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TimerObject.cs">
+    </Compile>
+    <Compile Include="TimerSmall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimerSmall.Designer.cs">
+      <DependentUpon>TimerSmall.cs</DependentUpon>
     </Compile>
     <Compile Include="Transparency.cs">
       <SubType>Form</SubType>
@@ -170,6 +183,7 @@
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\information.png" />
     <None Include="Resources\application_double.png" />
+    <None Include="Resources\grips.png" />
     <Content Include="Timer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

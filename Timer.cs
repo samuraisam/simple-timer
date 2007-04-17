@@ -16,21 +16,58 @@ using OOGroup;
 
 namespace Timer
 {
+    /// <summary>
+    /// Event handler for when forms change their opacity.
+    /// </summary>
+    public delegate void OpacityChangeHandler(object sender, EventArgs e);
+
+    /// <summary>
+    /// The Holy master timer class.
+    /// </summary>
     public partial class Timer : Form
     {
-        private UserActivityHook actHook;
-        private ResourceManager resman;
-        private ContextMenu taskbarMenu;
-        private DateTime timerStarted;
-        private Dictionary<int, Beeper> beepers;
+        /// <summary>
+        /// timerObject is what runs the timer. Publically ingestible for child forms.
+        /// </summary>
         public TimerObject timerObject;
+
+        /// <summary>
+        /// The smaller display for timer. Publically ingestible for child forms.
+        /// </summary>
+        public Form smallDisplay;
+
+        /// <summary>
+        /// Event for when Timer changes it's opacity.
+        /// </summary>
+        public event OpacityChangeHandler OpacityChanged;
+
+        /// <summary>
+        /// The Opacity of Timer, also fires OpacityChanged (hides base class's Opacity)
+        /// </summary>
+        public new virtual double Opacity
+        {
+            get
+            {
+                return base.Opacity;
+            }
+            set
+            {
+                base.Opacity = value;
+                if (OpacityChanged != null)
+                    OpacityChanged(this, new EventArgs());
+            }
+        }
 
         #region custom components
         private OOGroup.Windows.Forms.ImageButton startButton;
         private OOGroup.Windows.Forms.ImageButton resetButton;
         private OOGroup.Windows.Forms.ImageButton exitButton;
         #endregion
-
+        private UserActivityHook actHook;
+        private ResourceManager resman;
+        private ContextMenu taskbarMenu;
+        private DateTime timerStarted;
+        private Dictionary<int, Beeper> beepers;
         private bool isAltDown = false;
         private bool isSpcDown = false;
         private bool isCrtlDown = false;
@@ -198,7 +235,7 @@ namespace Timer
         /// <exception>Exception (when the input is invalid)</exception>
         private string GetName()
         {
-            NameTimer namer = new NameTimer();
+            NameTimer namer = new NameTimer(this);
             DialogResult re = namer.ShowDialog();
             string name = namer.GetNameValue();
             if (re == DialogResult.OK && !String.IsNullOrEmpty(name.Trim()))
@@ -396,6 +433,25 @@ namespace Timer
         }
 
         /// <summary>
+        /// Go small.
+        /// </summary>
+        private void timeDisplay_DoubleClick(object sender, EventArgs e)
+        {
+            this.smallDisplay = new TimerSmall(this);
+            this.smallDisplay.Show();
+            this.Hide();
+        }
+
+        /// <summary>
+        /// Go Big.
+        /// </summary>
+        public void GoBig()
+        {
+            this.Show();
+            this.smallDisplay.Close();
+        }
+
+        /// <summary>
         /// Maintains dictionary of beeper objects. Removes unchecked beepers,
         /// adds newly checked beepers.
         /// </summary>
@@ -424,7 +480,8 @@ namespace Timer
         private void aboutTimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About aboutDialog = new About(this);
-            DialogResult re = aboutDialog.ShowDialog();
+            //DialogResult re = aboutDialog.ShowDialog();
+            aboutDialog.Show();
         }
 
         /// <summary>
@@ -433,7 +490,7 @@ namespace Timer
         private void transparancyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Transparency transparencyDialog = new Transparency(this);
-            DialogResult re = transparencyDialog.ShowDialog();
+            transparencyDialog.Show();
         }
 
         /// <summary>
@@ -457,6 +514,7 @@ namespace Timer
                 );
             }
         }
+
         /// <summary>
         /// Start a new LapTimer
         /// </summary>
