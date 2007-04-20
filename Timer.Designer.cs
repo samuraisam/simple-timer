@@ -29,31 +29,22 @@ namespace Timer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Timer));
             this.timerMain = new System.Windows.Forms.Timer(this.components);
             this.timeDisplay = new System.Windows.Forms.TextBox();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.functionalityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.extraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timerLog = new System.Windows.Forms.DataGridView();
-            this.startColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stopColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.remindRightClick = new System.Windows.Forms.ToolTip(this.components);
-            this.remindDoubleClick = new System.Windows.Forms.ToolTip(this.components);
-            this.printBrowser = new System.Windows.Forms.WebBrowser();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.saveTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printTimerLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.simpleTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.countdownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stayOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +53,16 @@ namespace Timer
             this.every10MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.every15MinutesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.everyHourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.extraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutTimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timerLog = new System.Windows.Forms.DataGridView();
+            this.startColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stopColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.remindRightClick = new System.Windows.Forms.ToolTip(this.components);
+            this.remindDoubleClick = new System.Windows.Forms.ToolTip(this.components);
+            this.printBrowser = new System.Windows.Forms.WebBrowser();
             this.showLog = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -121,6 +121,54 @@ namespace Timer
             this.functionalityToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.functionalityToolStripMenuItem.Text = "Functions";
             // 
+            // saveTimerToolStripMenuItem
+            // 
+            this.saveTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.disk;
+            this.saveTimerToolStripMenuItem.Name = "saveTimerToolStripMenuItem";
+            this.saveTimerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveTimerToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.saveTimerToolStripMenuItem.Text = "Save Timer";
+            this.saveTimerToolStripMenuItem.Click += new System.EventHandler(this.saveTimerToolStripMenuItem_Click);
+            // 
+            // openTimerToolStripMenuItem
+            // 
+            this.openTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.folder_go;
+            this.openTimerToolStripMenuItem.Name = "openTimerToolStripMenuItem";
+            this.openTimerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openTimerToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.openTimerToolStripMenuItem.Text = "Open Timer";
+            this.openTimerToolStripMenuItem.Click += new System.EventHandler(this.openTimerToolStripMenuItem_Click);
+            // 
+            // printTimerLogToolStripMenuItem
+            // 
+            this.printTimerLogToolStripMenuItem.Image = global::Timer.Properties.Resources.printer;
+            this.printTimerLogToolStripMenuItem.Name = "printTimerLogToolStripMenuItem";
+            this.printTimerLogToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.printTimerLogToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.printTimerLogToolStripMenuItem.Text = "Print Timer Log";
+            this.printTimerLogToolStripMenuItem.Click += new System.EventHandler(this.printTimerLogToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(191, 6);
+            // 
+            // simpleTimerToolStripMenuItem
+            // 
+            this.simpleTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.clock_red;
+            this.simpleTimerToolStripMenuItem.Name = "simpleTimerToolStripMenuItem";
+            this.simpleTimerToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.simpleTimerToolStripMenuItem.Text = "Stopwatch (default)";
+            this.simpleTimerToolStripMenuItem.Click += new System.EventHandler(this.simpleTimerToolStripMenuItem_Click);
+            // 
+            // countdownToolStripMenuItem
+            // 
+            this.countdownToolStripMenuItem.Image = global::Timer.Properties.Resources.clock;
+            this.countdownToolStripMenuItem.Name = "countdownToolStripMenuItem";
+            this.countdownToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.countdownToolStripMenuItem.Text = "Countdown...";
+            this.countdownToolStripMenuItem.Click += new System.EventHandler(this.countdownToolStripMenuItem_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -133,6 +181,78 @@ namespace Timer
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
+            // 
+            // renameToolStripMenuItem
+            // 
+            this.renameToolStripMenuItem.Image = global::Timer.Properties.Resources.text_replace;
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.renameToolStripMenuItem.Text = "Rename";
+            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameButton_Click);
+            // 
+            // transparencyToolStripMenuItem
+            // 
+            this.transparencyToolStripMenuItem.Image = global::Timer.Properties.Resources.contrast;
+            this.transparencyToolStripMenuItem.Name = "transparencyToolStripMenuItem";
+            this.transparencyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.transparencyToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.transparencyToolStripMenuItem.Text = "Transparency...";
+            this.transparencyToolStripMenuItem.Click += new System.EventHandler(this.transparancyToolStripMenuItem_Click);
+            // 
+            // stayOnTopToolStripMenuItem
+            // 
+            this.stayOnTopToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.stayOnTopToolStripMenuItem.Image = global::Timer.Properties.Resources.application_double;
+            this.stayOnTopToolStripMenuItem.Name = "stayOnTopToolStripMenuItem";
+            this.stayOnTopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.stayOnTopToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.stayOnTopToolStripMenuItem.Text = "Stay On Top";
+            this.stayOnTopToolStripMenuItem.Click += new System.EventHandler(this.stayOnTopToolStripMenuItem_Click);
+            // 
+            // beepAtMeToolStripMenuItem
+            // 
+            this.beepAtMeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.every5MinutesToolStripMenuItem,
+            this.every10MinutesToolStripMenuItem,
+            this.every15MinutesToolStripMenuItem,
+            this.everyHourToolStripMenuItem});
+            this.beepAtMeToolStripMenuItem.Image = global::Timer.Properties.Resources.bell;
+            this.beepAtMeToolStripMenuItem.Name = "beepAtMeToolStripMenuItem";
+            this.beepAtMeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.beepAtMeToolStripMenuItem.Text = "Beep At Me";
+            // 
+            // every5MinutesToolStripMenuItem
+            // 
+            this.every5MinutesToolStripMenuItem.Name = "every5MinutesToolStripMenuItem";
+            this.every5MinutesToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.every5MinutesToolStripMenuItem.Tag = "5";
+            this.every5MinutesToolStripMenuItem.Text = "Every 5 Minutes";
+            this.every5MinutesToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
+            // 
+            // every10MinutesToolStripMenuItem
+            // 
+            this.every10MinutesToolStripMenuItem.Name = "every10MinutesToolStripMenuItem";
+            this.every10MinutesToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.every10MinutesToolStripMenuItem.Tag = "10";
+            this.every10MinutesToolStripMenuItem.Text = "Every 10 Minutes";
+            this.every10MinutesToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
+            // 
+            // every15MinutesToolStripMenuItem
+            // 
+            this.every15MinutesToolStripMenuItem.Name = "every15MinutesToolStripMenuItem";
+            this.every15MinutesToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.every15MinutesToolStripMenuItem.Tag = "30";
+            this.every15MinutesToolStripMenuItem.Text = "Every 30 Minutes";
+            this.every15MinutesToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
+            // 
+            // everyHourToolStripMenuItem
+            // 
+            this.everyHourToolStripMenuItem.Name = "everyHourToolStripMenuItem";
+            this.everyHourToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.everyHourToolStripMenuItem.Tag = "60";
+            this.everyHourToolStripMenuItem.Text = "Every Hour";
+            this.everyHourToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -147,45 +267,53 @@ namespace Timer
             this.extraToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.extraToolStripMenuItem.Text = "Extra";
             // 
+            // aboutTimerToolStripMenuItem
+            // 
+            this.aboutTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.information;
+            this.aboutTimerToolStripMenuItem.Name = "aboutTimerToolStripMenuItem";
+            this.aboutTimerToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.aboutTimerToolStripMenuItem.Text = "About Timer";
+            this.aboutTimerToolStripMenuItem.Click += new System.EventHandler(this.aboutTimerToolStripMenuItem_Click);
+            // 
             // timerLog
             // 
             this.timerLog.AllowUserToAddRows = false;
             this.timerLog.AllowUserToDeleteRows = false;
             this.timerLog.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.timerLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.timerLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.timerLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.timerLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.startColumn,
             this.stopColumn,
             this.timeColumn});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.timerLog.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.timerLog.DefaultCellStyle = dataGridViewCellStyle2;
             this.timerLog.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.timerLog.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.timerLog.Location = new System.Drawing.Point(13, 126);
             this.timerLog.Name = "timerLog";
             this.timerLog.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.timerLog.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.timerLog.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.timerLog.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.timerLog.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timerLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -239,132 +367,6 @@ namespace Timer
             this.printBrowser.TabIndex = 7;
             this.printBrowser.Url = new System.Uri("", System.UriKind.Relative);
             this.printBrowser.Visible = false;
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(191, 6);
-            // 
-            // saveTimerToolStripMenuItem
-            // 
-            this.saveTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.disk;
-            this.saveTimerToolStripMenuItem.Name = "saveTimerToolStripMenuItem";
-            this.saveTimerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveTimerToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.saveTimerToolStripMenuItem.Text = "Save Timer";
-            this.saveTimerToolStripMenuItem.Click += new System.EventHandler(this.saveTimerToolStripMenuItem_Click);
-            // 
-            // openTimerToolStripMenuItem
-            // 
-            this.openTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.folder_go;
-            this.openTimerToolStripMenuItem.Name = "openTimerToolStripMenuItem";
-            this.openTimerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openTimerToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.openTimerToolStripMenuItem.Text = "Open Timer";
-            this.openTimerToolStripMenuItem.Click += new System.EventHandler(this.openTimerToolStripMenuItem_Click);
-            // 
-            // printTimerLogToolStripMenuItem
-            // 
-            this.printTimerLogToolStripMenuItem.Image = global::Timer.Properties.Resources.printer;
-            this.printTimerLogToolStripMenuItem.Name = "printTimerLogToolStripMenuItem";
-            this.printTimerLogToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printTimerLogToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.printTimerLogToolStripMenuItem.Text = "Print Timer Log";
-            this.printTimerLogToolStripMenuItem.Click += new System.EventHandler(this.printTimerLogToolStripMenuItem_Click);
-            // 
-            // simpleTimerToolStripMenuItem
-            // 
-            this.simpleTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.clock_red;
-            this.simpleTimerToolStripMenuItem.Name = "simpleTimerToolStripMenuItem";
-            this.simpleTimerToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.simpleTimerToolStripMenuItem.Text = "Stopwatch (default)";
-            this.simpleTimerToolStripMenuItem.Click += new System.EventHandler(this.simpleTimerToolStripMenuItem_Click);
-            // 
-            // countdownToolStripMenuItem
-            // 
-            this.countdownToolStripMenuItem.Image = global::Timer.Properties.Resources.clock;
-            this.countdownToolStripMenuItem.Name = "countdownToolStripMenuItem";
-            this.countdownToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.countdownToolStripMenuItem.Text = "Countdown...";
-            this.countdownToolStripMenuItem.Click += new System.EventHandler(this.countdownToolStripMenuItem_Click);
-            // 
-            // renameToolStripMenuItem
-            // 
-            this.renameToolStripMenuItem.Image = global::Timer.Properties.Resources.text_replace;
-            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            this.renameToolStripMenuItem.ShortcutKeyDisplayString = "";
-            this.renameToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.renameToolStripMenuItem.Text = "Rename";
-            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameButton_Click);
-            // 
-            // transparencyToolStripMenuItem
-            // 
-            this.transparencyToolStripMenuItem.Image = global::Timer.Properties.Resources.contrast;
-            this.transparencyToolStripMenuItem.Name = "transparencyToolStripMenuItem";
-            this.transparencyToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.transparencyToolStripMenuItem.Text = "Transparency...";
-            this.transparencyToolStripMenuItem.Click += new System.EventHandler(this.transparancyToolStripMenuItem_Click);
-            // 
-            // stayOnTopToolStripMenuItem
-            // 
-            this.stayOnTopToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.stayOnTopToolStripMenuItem.Image = global::Timer.Properties.Resources.application_double;
-            this.stayOnTopToolStripMenuItem.Name = "stayOnTopToolStripMenuItem";
-            this.stayOnTopToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.stayOnTopToolStripMenuItem.Text = "Stay On Top";
-            this.stayOnTopToolStripMenuItem.Click += new System.EventHandler(this.stayOnTopToolStripMenuItem_Click);
-            // 
-            // beepAtMeToolStripMenuItem
-            // 
-            this.beepAtMeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.every5MinutesToolStripMenuItem,
-            this.every10MinutesToolStripMenuItem,
-            this.every15MinutesToolStripMenuItem,
-            this.everyHourToolStripMenuItem});
-            this.beepAtMeToolStripMenuItem.Image = global::Timer.Properties.Resources.bell;
-            this.beepAtMeToolStripMenuItem.Name = "beepAtMeToolStripMenuItem";
-            this.beepAtMeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.beepAtMeToolStripMenuItem.Text = "Beep At Me";
-            // 
-            // every5MinutesToolStripMenuItem
-            // 
-            this.every5MinutesToolStripMenuItem.Name = "every5MinutesToolStripMenuItem";
-            this.every5MinutesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.every5MinutesToolStripMenuItem.Tag = "5";
-            this.every5MinutesToolStripMenuItem.Text = "Every 5 Minutes";
-            this.every5MinutesToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
-            // 
-            // every10MinutesToolStripMenuItem
-            // 
-            this.every10MinutesToolStripMenuItem.Name = "every10MinutesToolStripMenuItem";
-            this.every10MinutesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.every10MinutesToolStripMenuItem.Tag = "10";
-            this.every10MinutesToolStripMenuItem.Text = "Every 10 Minutes";
-            this.every10MinutesToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
-            // 
-            // every15MinutesToolStripMenuItem
-            // 
-            this.every15MinutesToolStripMenuItem.Name = "every15MinutesToolStripMenuItem";
-            this.every15MinutesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.every15MinutesToolStripMenuItem.Tag = "30";
-            this.every15MinutesToolStripMenuItem.Text = "Every 30 Minutes";
-            this.every15MinutesToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
-            // 
-            // everyHourToolStripMenuItem
-            // 
-            this.everyHourToolStripMenuItem.Name = "everyHourToolStripMenuItem";
-            this.everyHourToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.everyHourToolStripMenuItem.Tag = "60";
-            this.everyHourToolStripMenuItem.Text = "Every Hour";
-            this.everyHourToolStripMenuItem.Click += new System.EventHandler(this.beepMenuItem_Click);
-            // 
-            // aboutTimerToolStripMenuItem
-            // 
-            this.aboutTimerToolStripMenuItem.Image = global::Timer.Properties.Resources.information;
-            this.aboutTimerToolStripMenuItem.Name = "aboutTimerToolStripMenuItem";
-            this.aboutTimerToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.aboutTimerToolStripMenuItem.Text = "About Timer";
-            this.aboutTimerToolStripMenuItem.Click += new System.EventHandler(this.aboutTimerToolStripMenuItem_Click);
             // 
             // showLog
             // 
