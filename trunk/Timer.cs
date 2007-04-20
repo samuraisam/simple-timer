@@ -1,15 +1,20 @@
 using System;
 using System.Resources;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 using gma.System.Windows;
 using OOGroup;
@@ -324,6 +329,139 @@ namespace Timer
         }
 
         /// <summary>
+        /// Generates a html summary of the current timerLog
+        /// </summary>
+        /// <returns>String of HTML</returns>
+        public string GenerateLogHTML()
+        {
+            string rowsHTML = "";
+            string style = @"
+                th { text-align: left; }
+                .l { background-color: white; }
+                .r { background-color: #ebebeb; }
+                table { border-collapse: collapse; }
+            ";
+
+            int i = 2;
+
+            foreach (DataGridViewRow row in this.timerLog.Rows)
+            {
+                bool r = (i % 2 == 0);
+                rowsHTML += String.Format(@"
+                    <tr bgcolor='{3}'>
+                        <td width=300>{0}</td>
+                        <td width=300>{1}</td>
+                        <td width=300>{2}</td>
+                    </tr>
+                    ",
+                    row.Cells[0].Value, row.Cells[1].Value, row.Cells[2].Value,
+                    r ? "#FFFFFF" : "#EBEBEB"
+                );
+                i++;
+            }
+
+            return String.Format(@"
+                <html>
+                    <head>
+                        <title>{0}</title>
+                        <style>{3}</style>
+                    </head>
+                    <body>
+                        <h1 style='border-bottom:1px solid black;'>{0}</h1>
+                        <table>
+                            <tr><th>Start</th><th>Stop</th><th>Total</th></tr>
+                            {1}
+                            <tr><td>&nbsp;</td><td>&nbsp;</td><td><b>{2}</b></td></tr>
+                        </table>
+                    </body>
+                </html>
+                ",
+                this.Text, rowsHTML, this.timeDisplay.Text, style
+            );
+        }
+
+        /// <summary>
+        /// Shows a print dialog to print whatever GenerateLogHTML spits out
+        /// </summary>
+        public void PrintLog()
+        {
+            this.printBrowser.DocumentText = this.GenerateLogHTML();
+
+            this.printBrowser.DocumentCompleted +=
+                new WebBrowserDocumentCompletedEventHandler(delegate(object sender, WebBrowserDocumentCompletedEventArgs e)
+            {
+                this.printBrowser.ShowPrintDialog();
+            });
+        }
+
+        /// <summary>
+        /// Creates a list from all current timerLog items
+        /// </summary>
+        /// <returns>A list of current timerLog items</returns>
+        private List<List<string>> ListFromLog()
+        {
+            List<List<string>> ret = new List<List<string>>();
+            foreach (DataGridViewRow row in this.timerLog.Rows)
+            {
+                List<string> add = new List<string>();
+                add.Add((string)row.Cells[0].Value);
+                add.Add((string)row.Cells[1].Value);
+                add.Add((string)row.Cells[2].Value);
+                ret.Add(add);
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// Resets the current timerLog and adds all new values
+        /// from the provided list.
+        /// </summary>
+        /// <param name="values">Values to insert into timerLog</param>
+        private void ResetLogFromList(List<List<string>> values)
+        {
+            this.timerLog.Rows.Clear();
+            foreach (List<string> row in values)
+            {
+                this.timerLog.Rows.Add(
+                    row[0], row[1], row[2]
+                );
+            }
+        }
+
+        /// <summary>
+        /// Save the state of Timer to a file
+        /// </summary>
+        /// <param name="file">Stream to write to.</param>
+        private void Save(Stream file)
+        {
+            BinaryFormatter b = new BinaryFormatter();
+            Hashtable se = new Hashtable();
+            se.Add("TimerObject", this.timerObject);
+            se.Add("TimerLog", this.ListFromLog());
+            se.Add("TimerTimerStarted", this.timerStarted);
+            se.Add("TimerOpacity", this.Opacity);
+            se.Add("TimerText", this.Text);
+            b.Serialize(file, se);
+        }
+
+        /// <summary>
+        /// Re-create a Timer that had been saved.
+        /// </summary>
+        /// <param name="file">Stream to reat from.</param>
+        private void Open(Stream file)
+        {
+            BinaryFormatter b = new BinaryFormatter();
+            Hashtable se = (Hashtable)b.Deserialize(file);
+            TimerObject t = (TimerObject)se["TimerObject"];
+            t.Timer = this;
+            this.timerObject = t;
+            this.ResetLogFromList((List<List<string>>)se["TimerLog"]);
+            this.timerStarted = (DateTime)se["TimerTimerStarted"];
+            this.Opacity = (double)se["TimerOpacity"];
+            this.Text = (string)se["TimerText"];
+        }
+
+        /// <summary>
         /// Toggles between calling timer objects's start and stop method. Maintains Timer
         /// interface for appropriate state.
         /// </summary>
@@ -443,7 +581,7 @@ namespace Timer
         }
 
         /// <summary>
-        /// Go Big.
+        /// Go Big. 
         /// </summary>
         public void GoBig()
         {
@@ -480,7 +618,6 @@ namespace Timer
         private void aboutTimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About aboutDialog = new About(this);
-            //DialogResult re = aboutDialog.ShowDialog();
             aboutDialog.Show();
         }
 
@@ -500,7 +637,7 @@ namespace Timer
         {
             Countdown countdownDialog = new Countdown(this);
             DialogResult re = countdownDialog.ShowDialog();
-            if (re == DialogResult.OK) // don't do anything unless user clicked "OK"
+            if (re == DialogResult.OK)
             {
                 if (this.timerObject.IsRunning)
                 {
@@ -542,6 +679,43 @@ namespace Timer
             {
                 i.BackColor = System.Drawing.SystemColors.Control;
                 this.TopMost = false;
+            }
+        }
+
+        /// <summary>
+        /// Tells Timer to print it's log.
+        /// </summary>
+        private void printTimerLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.PrintLog();
+        }
+
+        /// <summary>
+        /// Tells timer to save it's state to a file.
+        /// </summary>
+        private void saveTimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FileName = this.Text;
+            DialogResult re = this.saveFileDialog.ShowDialog();
+            if (re == DialogResult.OK)
+            {
+                Stream f = this.saveFileDialog.OpenFile();
+                this.Save(f);
+                f.Close();
+            }
+        }
+
+        /// <summary>
+        /// Tells timer to open re-create a saved state.
+        /// </summary>
+        private void openTimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult re = this.openFileDialog.ShowDialog();
+            if (re == DialogResult.OK)
+            {
+                Stream f = this.openFileDialog.OpenFile();
+                this.Open(f);
+                f.Close();
             }
         }
 

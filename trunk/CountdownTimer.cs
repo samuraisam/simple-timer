@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Media;
+using System.Runtime.Serialization;
 
 namespace Timer
 {
     /// <summary>
     /// Implementation of TimerObject that counts down from a given hour/minute/second
     /// </summary>
+    [Serializable()]
     class CountdownTimer : TimerObject
     {
         private TimeSpan countdownFrom;
@@ -27,6 +29,26 @@ namespace Timer
             this.playedAlert = false;
             this.countdownFrom = new TimeSpan(hours, minutes, seconds);
             this.ParentTimer.timerMain.Tick += new EventHandler(this.CalculateTimeLeft);
+        }
+
+        /// <summary>
+        /// Wake up from sleep
+        /// </summary>
+        public CountdownTimer(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            this.countdownFrom = (TimeSpan)info.GetValue("CountdownTimerCountdownFrom", typeof(TimeSpan));
+            this.playedAlert = (bool)info.GetValue("CountdownTimerPlayedAlert", typeof(bool));
+        }
+
+        /// <summary>
+        /// Go to sleep
+        /// </summary>
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("CountdownTimerCountdownFrom", this.countdownFrom);
+            info.AddValue("CountdownTimerPlayedAlert", this.playedAlert);
+            base.GetObjectData(info, context);
         }
 
         /// <summary>
