@@ -140,6 +140,7 @@ namespace Timer
             this.startButton.Size = new System.Drawing.Size(114, 38);
             this.startButton.TabIndex = 1;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            this.startButton.ContextMenuStrip = this.contextMenu;
 
             // 
             //  resetButton
@@ -157,6 +158,7 @@ namespace Timer
             this.resetButton.Text = "Reset";
             this.resetButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            this.resetButton.ContextMenuStrip = this.contextMenu;
             
             // 
             //  exitButton
@@ -175,6 +177,7 @@ namespace Timer
             this.exitButton.Text = "Exit";
             this.exitButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            this.exitButton.ContextMenuStrip = this.contextMenu;
 
             //
             //  taskbarMenu
