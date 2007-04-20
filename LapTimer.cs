@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace Timer
 {
@@ -8,10 +9,16 @@ namespace Timer
     /// <summary>
     /// Implementation of TimerObject that provides a very simple lap timer.
     /// </summary>
+    [Serializable()]
     public class LapTimer : TimerObject
     {
         public LapTimer(Timer timer)
             : base(timer)
+        {
+        }
+
+        public LapTimer(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
 

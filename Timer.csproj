@@ -27,10 +27,9 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
     <ProductName>Timer</ProductName>
-    <PublisherName>Samuel Sutch</PublisherName>
     <CreateWebPageOnPublish>false</CreateWebPageOnPublish>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationVersion>1.3.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.3.1.%2a</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -90,6 +89,7 @@
     <Compile Include="NameTimer.Designer.cs">
       <DependentUpon>NameTimer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Timer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +170,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Resources\aarow-down.png" />
     <None Include="Resources\arrow-up.png" />
     <None Include="Resources\clock.png" />
@@ -184,6 +185,9 @@
     <None Include="Resources\information.png" />
     <None Include="Resources\application_double.png" />
     <None Include="Resources\grips.png" />
+    <None Include="Resources\printer.png" />
+    <None Include="Resources\disk.png" />
+    <None Include="Resources\folder_go.png" />
     <Content Include="Timer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
