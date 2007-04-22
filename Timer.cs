@@ -722,16 +722,6 @@ namespace Timer
             }
         }
 
-        private void changeTimeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ChangeTime changeTimeDialog = new ChangeTime(this);
-            DialogResult re = changeTimeDialog.ShowDialog();
-            if (DialogResult.OK == re)
-            {
-                // do some shit here
-            }
-        }
-
         /// <summary>
         /// Flashes the window numTimes of times in another thread.
         /// Specifying true for stayLit will make the window stay "flashed" after flashing.
